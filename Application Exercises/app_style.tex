@@ -4,8 +4,16 @@
 
 \usepackage[top=1cm,bottom=1cm,left=1.5cm,right= 1.5cm]{geometry}
 \usepackage[parfill]{parskip}
-\usepackage{graphicx, fontspec, xcolor,multicol, enumitem, setspace}
+\usepackage{graphicx, fontspec, xcolor, multicol, enumitem, setspace}
 \DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+
+%%%%%%%%%%%%%%%%
+% Sakai link - update each semester
+%%%%%%%%%%%%%%%%
+
+\newcommand{\Sakai}[1]
+{\href{https://sakai.duke.edu/portal/site/ef372254-413e-42f6-b414-f8bc91a58fa0/page/98390abf-b461-44cb-a062-aa6864748ab3}{Sakai}}
+
 
 %%%%%%%%%%%%%%%%
 % No page number

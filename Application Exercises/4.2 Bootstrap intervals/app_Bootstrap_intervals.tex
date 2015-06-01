@@ -8,7 +8,7 @@
 % DON'T FORGET TO UPDATE
 
 \newcommand{\appno}[1]
-{3.2}
+{4.2}
 
 %%%%%%%%%%%%%%
 % Turn on/off solutions       %
@@ -34,26 +34,35 @@
 Dr. \c{C}etinkaya-Rundel \hfill Data Analysis and Statistical Inference \\
 
 \ttl{Application exercise \appno{}: \\
-Hypothesis testing for a single mean}
+Bootstrap intervals}
 
 \inst{Submit your responses on \Sakai{}, under the appropriate assignment. Only one submission per team is required. One team will be randomly selected and their responses will be discussed.}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
-In 2001 the average GPA of students at Duke University was 3.37. Last semester 63 Sta 101 students responded to the question on GPA on the class survey. The mean was 3.58, and the standard deviation 0.53. A histogram of the data is shown below.
+The following histogram shows the distribution of RottenTomatoes scores of a random sample of 54 comedies. The average score is 52.52 (out of 100).
 
 \begin{center}
-\includegraphics[width=0.5\textwidth]{survey/hist_gpa}
+\includegraphics[width = 0.7\textwidth]{figures/comedy_hist}
 \end{center}
 
-Assuming that this sample is random and representative of all Duke students (bit of a leap of faith? you can discuss that when checking the conditions), do these data provide convincing evidence that the average GPA of Duke students has \textbf{\underline{changed}} over the last decade and a half?
+The dot plot below shows the distribution of 200 bootstrap means calculated based on this sample.
 
-Make sure to check conditions, note any assumptions you make, and show all your work.
+\begin{center}
+\includegraphics[width = 0.7\textwidth]{figures/comedy_boot_mean_dot}
+\end{center}
 
-%> Z = (3.58-3.37)/(.53/sqrt(63))
-%> pnorm(Z, lower.tail = FALSE)*2
-%[1] 0.0016
+The bootstrap standard error is  1.98.
+
+\begin{enumerate}
+
+\item Describe in detail how this bootstrap distribution is constructed, outlining each step.
+
+\item Construct a 95\% bootstrap interval for the average RottenTomatoes score of comedies, using both methods.
+
+\item Describe the differences and similarities between bootstrap and sampling distributions.
+
+\end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

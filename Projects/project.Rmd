@@ -1,0 +1,179 @@
+---
+title: "Project"
+output:
+  html_document:
+    css: project.css
+    highlight: pygments
+    theme: cerulean
+    toc: true
+    number_sections: true
+---
+
+Your data analysis project is writing a research paper addressing a research question that can be answered using a hypothesis test and/or confidence interval. You can choose to work with one numerical or one categorical variable, or you can choose to evaluate the relationship between a categorical and a numerical or two categorical variables (so the only combination that is out is two numerical variables). This is an **individual** (not team) project.
+
+# Goal
+
+Your goal is to submit a completely reproducible project (i.e. if I download your markdown file and run it on my computer I should get the same results and write-up) that conveys that you have mastered statistical inference techniques that we have learned in class and that help you answer your research question.
+
+# Data
+
+You can use a dataset of your own choosing, or use one of the datasets curated by the Duke Data and Visualization Services. See their course guide at http://guides.library.duke.edu/stat101. Available datasets include:
+
+- Behavioral Risk Factor Surveillance System (BRFSS)
+- World Values Survey
+- American National Election Survey (ANES)
+- General Social Survey (GSS)
+
+Note that the GSS dataset is huge because it contains responses from many years. When doing your analysis you should first limit your dataset to one or few years you're interested in since opinions may have changed on certain topics over the years. Or you might choose to compare opinions on a specific issue across two or more years.
+
+If you choose to not use one of these datasets, you can find a dataset online or from another source, or collect your own data (either via a survey or experiment). Some ground rules:
+
+- You may **not** use any dataset used in this class - from labs, textbook, etc. 
+- You should avoid using population datasets (such as data from all countries, all counties, etc.) -- the purpose of this project is to do statistical inference, which means you should be starting with sample data.
+- If you collect your own data and your sampling method isn't perfect, or find a dataset where you are worried the data may not have been sampled randomly, you may still use the dataset with appropriate discussion of the shortcomings of the study, biases, etc. 
+
+# Getting your data into RStudio
+
+For the datasets provided by the library download the zipped data folders, unzip them, and upload the .Rdata file onto RStudio (there is an upload button in the Files tab on the bottom right page). You can view the codebook using the html files in the zipped archive you download (simply drag them to your browser), or by using the Survey Documentation tool provided on the library website.
+
+If you prefer to work with a different dataset of your choosing, you will need to put your dataset in a Google Spreadsheet or Excel file, save it as a comma separated file (.csv), and upload that file to RStudio. You can find more detailed instructions on this on the [course FAQ](https://stat.duke.edu/courses/Summer15/sta104.01-1/faq/) page (See under R related, ``My dataset is in a .csv file on my computer. How can I get it into RStudio?".)
+
+# Tone
+
+Write as if you are explaining your results to whoever would be interested in your research question, whether this is other scholars in your field or peers sharing your interest in the topic.  Keep in mind this audience may or may not have taken statistics. You must be statistically accurate and use correct statistical terminology, but must also explain your conclusions in a way that anyone can understand. 
+
+# Reproducibility
+
+I will re-run your Markdown file and attempt to reproduce your results. Failures in reproducibility will result in penalties.
+
+# Late work policy
+
+10% off for every day (24-hours) late - that's 1 point per day for the proposal, and 10 points per day for the project.
+
+# Support
+
+As always, feel free to come to me or your TA with questions about your proposal. Also, for questions relating to finding a dataset and getting it into R, you can also use the Data and Visualization Library's office hours: http://library.duke.edu/data/about/schedule.
+
+# Honor code
+
+Since this is an individual project, you must complete it on your own. You are welcomed to talk with peers (feel free to ask questions of each other, share ideas, or discuss concepts), but all calculations, R code, and writing must be done by yourself, and cannot be shared accross individuals. Failure to abide by these policies will result in a 0 for everyone involved.
+
+You must electronically sign the honor pledge associated with this assignment on Sakai.
+
+* * *
+
+# Proposal
+
+## Format
+
+Downlod the markdown template for your project proposal using the following code:
+
+```{r tidy=FALSE, eval=FALSE}
+download("https://stat.duke.edu/courses/Summer15/sta104.01-1/post/projects/sta104_prj_proposal.Rmd", destfile = "[your_name]_proposal.Rmd")
+```
+
+In the `destfile` argument, insert your name. For example, I would use `destfile = "mine_cetinkaya_rundel_proposal.Rmd"`. This way we can keep track of your file during grading.
+
+## Content
+
+Answer the following briefly but thoroughly.
+s
+- Research question - You should phrase your research question in a way that matches up with the scope of inference your dataset allows for.
+- Cases - What are the cases, and how many are there?
+- Data collection - Describe the method of data collection.
+- Type of study - What type of study is this (observational/experiment)?
+- Data Source - If you collected the data, state self-collected. If not, provide a citation/link.
+- Link to data - If using a dataset other than those provided by the library, provide a link to a Google Spreadsheet that you have shared with me at cetinkaya.mine@gmail.com. 
+- Response - What is the response variable, and what type is it (numerical/categorival)?
+- Explanatory - What is the explanatory variable, and what type is it (numerical/categorival)?
+- Relevant summary statistics - Provide summary statistics relevant to your research question. For example, if you're comparing means across groups provide means, SDs, sample sizes of each group. **This step requires the use of R.**
+
+## Length
+
+There is no formal length limit, but this shouldn't be more than just a couple pages. Remember that the final project limit is 7 pages, and this information will feed into two sections of your final project, so keep it brief!
+
+## Submission
+
+Submit the following:
+
+1. RMarkdown file (`.Rmd`)
+2. HTML output (`.html`)
+3. Data file (`.Rdata` or `.csv` format)
+
+## Grading
+
+For your proposal, you will receive a check+, check, check-, or 0, and feedback. Note that proposals make up 10\% of the project grade.
+
+* * *
+
+# Project
+
+## Format
+
+Downlod the markdown template for your project proposal using the following code:
+
+```{r tidy=FALSE, eval=FALSE}
+download("https://stat.duke.edu/courses/Summer15/sta104.01-1/post/projects/sta104_prj.Rmd", destfile = "[your_name]_project.Rmd")
+```
+
+In the `destfile` argument, insert your name. For example, I would use `destfile = "mine_cetinkaya_rundel_project.Rmd"`. This way we can keep track of your file during grading.
+
+## Content
+
+Your project should be a write up of parts 1 - 5 below in the form of a research paper. 
+
+1. **Part 1 - Introduction:** *(10 points)* What is your research question? Why do you care? Why should others care? 
+
+2. **Part 2 -  Data:** *(15 points)* Write about the data from your proposal in text (not bullet-point) form. Address the following points:
+
+    * *Data collection:* Describe how the data were collected.
+    * *Cases:* What are the cases? (Remember: case = units of observation or units of experiment)
+    * *Variables:* What are the two variables you will be studying? State the type of each variable.
+    * *Type of study:* What is the type of study, observational or an experiment? Explain how you've arrived at your conclusion using information on the sampling and/or experimental design.
+    * *Scope of inference - generalizability:* Identify the population of interest, and whether the findings from this analysis can be generalized to that population, or, if not, a subsection of that population. Explain why or why not. Also discuss any potential sources of bias that might prevent generalizability.
+    * *Scope of inference - causality:* Can these data be used to establish causal links between the variables of interest? Explain why or why not.
+
+3. **Part 3 -  Exploratory data analysis:** *(15 points)* Perform relevant descriptive statistics, including summary statistics and visualization of the data. Also address what the exploratory data analysis suggests about your research question. 
+
+4. **Part 4 - Inference:** *(25 points)*
+    * Check conditions
+    * Theoretical inference (if possible) - hypothesis test and confidence interval
+    * Simulation based inference - hypothesis test and confidence interval
+    * Brief description of methodology that reflects your conceptual understanding
+
+If your data fails some conditions and you can't use a theoretical method, then you should use simulation. If you can use both methods, then you should use both methods. It is your responsibility to figure out the appropriate methodology. 
+
+5. **Part 5 - Conclusion:** *(10 points)* Write a brief summary of your findings without repeating your statements from earlier. Also include a discussion of what you have learned about your research question and the data you collected. You may also want to include ideas for possible future research.
+
+## Length
+
+Your write up should be **at most 7 pages (including figures and R code)**. This is not very long, you will need to be concise. Every sentence should add something to your paper. Note that you can resize figures, hide/reveal code, etc. If you're not sure how to do these ask during class or office hours, or on Piazza.
+  
+## Submission
+
+Online at Sakai under Assignments. These will be time stamped, and late penalty will be applied based on the time stamp.
+
+1. RMarkdown file (`.Rmd`)
+2. HTML output (`.html`)
+3. Data file (`.Rdata` or `.csv` format)
+
+## Grading
+
+Part                                | Points
+------------------------------------|------------
+Part 1 - Introduction               | 10 
+Part 2 - Data                       | 15 
+Part 3 - Exploratory data analysis  | 15 
+Part 4 - Inference                  | 25 
+Part 5 - Conclusion                 | 10 
+Proposal                            | 10 
+Overall writing quality             | 5 
+Reproducibility                     | 10 
+**Total**                           | **100 points**
+
+The following will result in point deductions:
+
+* Late: -10 points for each day late
+* Did not follow five part format: -5 points
+* Difficult to follow, requiring to go back to the data and replicate the analysis: -10 points
+* Each page over limit: - 5 points per page (view print preview to confirm length)

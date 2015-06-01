@@ -1,0 +1,95 @@
+\documentclass[11pt]{article}
+\input{../app_style.tex}
+
+%%%%%%%%%%%%%%%%
+% Timing
+%%%%%%%%%%%%%%%%
+
+% 12-15 minutes
+
+%%%%%%%%%%%%%%%%
+% Sakai link for course
+%%%%%%%%%%%%%%%%
+
+% UPDATE FOR OWN COURSE
+% LINK TO ASSIGNMENTS TOOL IN SAKAI
+
+\newcommand{\Sakai}[1]
+{\href{https://sakai.duke.edu/portal/site/ba0d1c18-ba55-473f-9d70-b6a1f9559bbe/page/9870858b-a1a9-481e-8497-8a6ffe9e5be2}{Sakai}}
+% ALT ALT
+%\renewcommand{\Sakai}[1]{\href{https://sakai.duke.edu/portal/site/8d786209-ab9d-4d66-9a00-e138eaadd9c9/page/ad6d459a-be57-45d6-b0f1-13a3fa28b8ea}{Sakai}}
+
+%%%%%%%%%%%
+% App Ex number    %
+%%%%%%%%%%%
+
+% DON'T FORGET TO UPDATE
+
+\newcommand{\appno}[1]
+{2.3}
+
+%%%%%%%%%%%%%%
+% Turn on/off solutions       %
+%%%%%%%%%%%%%%
+
+% Off
+\newcommand{\soln}[1]{
+\vskip5pt
+}
+
+%% On
+%\newcommand{\soln}[1]{
+%\textit{\textcolor{custom_darkGray}{#1}}
+%}
+
+%%%%%%%%%%%%%%%%
+% Document
+%%%%%%%%%%%%%%%%
+
+\begin{document}
+\fontspec[Ligatures=TeX]{Helvetica Neue Light}
+
+Dr. \c{C}etinkaya-Rundel \hfill Data Analysis and Statistical Inference \\
+
+\ttl{Application exercise \appno{}: \\
+Normal distribution}
+
+\inst{Submit your responses on \Sakai{}, under the appropriate assignment. Only one submission per team is required. One team will be randomly selected and their responses will be discussed.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+In this activity we'll work with data on average hourly wage for manufacturing workers, in the United States as well as in North Carolina. The data come from the The 2012 Statistical Abstract.\footnote{Source: U.S. Bureau of Labor Statistics, Current Employment Statistics, ``State and Metro Area Employment, Hours, and Earnings (SAE),Ó March, 2010, \url{http://www.bls.gov/sae/\#data.htm} and \url{http://www.census.gov/compendia/statab/2012/tables/12s1016.pdf}.} Assume that the distributions of the manufacturing wage rates, nationwide and in North Carolina, can be approximated by a normal distribution. \\
+
+\textbf{Part 1:}
+Government data indicates that the average hourly wage for manufacturing workers in the United States is \$18.61, with a standard deviation of \$1.35. 
+\begin{enumerate}
+
+\item What percent of manufacturing workers make more than \$20/hour?
+
+\item What percent of manufacturing workers make between \$18 - \$20/hour? \\
+
+\end{enumerate}
+
+\textbf{Part 2:}
+Government data also indicates that the average hourly wage for manufacturing workers in North Carolina is \$15.85. 
+
+\begin{enumerate}
+
+\item[3.] An unemployed worker did a job search in North Carolina, and found that 15\% of the manufacturing jobs paid more than \$17 per hour. What is the standard deviation of the distribution of hourly wage for manufacturing workers in North Carolina?
+
+\item[4.] Suppose that a worker applies for a manufacturing job in North Carolina, and received the good news that she got the job and that her pay will be at least \$16.50 per hour. She would really like to be able to make at least \$17 per hour. What is the probability that she will get what she wants? Assume that the company she will be working for is a run-of-the-mill manufacturing company in NC, i.e. the distribution of the hourly wages at this company reflects the state distribution. \textit{Hint:} This is a conditional probability. \\
+
+\end{enumerate}
+
+\textbf{Part 3:}
+Government data also indicates that the average hourly wage for manufacturing workers in New York is \$18.39, with a standard deviation of \$1.5. 
+
+\begin{enumerate}
+
+\item[5.] Who is doing better within their state: a NC manufacturing worker who makes \$17/hr or a NY manufacturing worker who makes \$19/hr?
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}

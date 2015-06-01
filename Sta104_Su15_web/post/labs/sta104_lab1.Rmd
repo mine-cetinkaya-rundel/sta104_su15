@@ -1,0 +1,66 @@
+---
+title: "Lab 1"
+author: "[Enter team name here]"
+date: "[Enter date here]"
+output:
+  html_document:
+    fig_height: 4
+    fig_width: 6
+---
+
+**Author:** [Enter author name here]
+
+**Discussants:** [Enter discussant names here. Remember, these are other team members present in lab.]
+
+* * *
+
+**Load CDC data:**
+```{r}
+
+```
+
+* * *
+
+#### Exercise 1: 
+
+
+#### Exercise 2:
+
+
+#### Exercise 3:
+
+
+#### Exercise 4:
+
+
+#### Exercise 5:
+
+
+#### Exercise 6:
+
+
+#### Exercise 7:
+
+
+#### Exercise 8:
+
+* * *
+
+**Load class survey data:**
+```{r}
+
+```
+
+* * *
+### On your own:
+
+
+#### 1:
+
+
+#### 2:
+
+
+#### 3:
+
+

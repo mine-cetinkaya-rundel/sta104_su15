@@ -1,0 +1,95 @@
+\documentclass[11pt]{article}
+\input{../app_style.tex}
+
+%%%%%%%%%%%%%%%%
+% Timing
+%%%%%%%%%%%%%%%%
+
+% 12-15 minutes
+
+%%%%%%%%%%%%%%%%
+% Sakai link for course
+%%%%%%%%%%%%%%%%
+
+% UPDATE FOR OWN COURSE
+% LINK TO ASSIGNMENTS TOOL IN SAKAI
+
+\newcommand{\Sakai}[1]
+{\href{https://sakai.duke.edu/portal/site/ba0d1c18-ba55-473f-9d70-b6a1f9559bbe/page/9870858b-a1a9-481e-8497-8a6ffe9e5be2}{Sakai}}
+
+%%%%%%%%%%%
+% App Ex number    %
+%%%%%%%%%%%
+
+% DON'T FORGET TO UPDATE
+
+\newcommand{\appno}[1]
+{3.4}
+
+%%%%%%%%%%%%%%
+% Turn on/off solutions       %
+%%%%%%%%%%%%%%
+
+% Off
+\newcommand{\soln}[1]{
+\vskip5pt
+}
+
+%% On
+%\newcommand{\soln}[1]{
+%\textit{\textcolor{custom_darkGray}{#1}}
+%}
+
+%%%%%%%%%%%%%%%%
+% Document
+%%%%%%%%%%%%%%%%
+
+\begin{document}
+\fontspec[Ligatures=TeX]{Helvetica Neue Light}
+
+Dr. \c{C}etinkaya-Rundel \hfill Data Analysis and Statistical Inference \\
+
+\ttl{Application exercise \appno{}: \\
+Inference for a mean - interpretations}
+
+\inst{Submit your responses on \Sakai{}, under the appropriate assignment. Only one submission per team is required. One team will be randomly selected and their responses will be discussed.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+A hospital administrator hoping to improve wait times decides to estimate the average emergency room waiting time at her hospital. She collects a simple random sample of 64 patients and determines the time (in minutes) between when they checked in to the ER until they were first seen by a doctor. A 95\% confidence interval based on this sample is (128 minutes, 147 minutes), which is based on the normal model for the mean. 
+
+\begin{enumerate}
+
+\item Determine whether the following statements are true or false, and explain your reasoning. 
+\begin{enumerate}
+
+\item This confidence interval is not valid since we do not know if the population distribution of the ER wait times is nearly normal.
+
+\item We are 95\% confident that the average waiting time of these 64 emergency room patients is between 128 and 147 minutes.
+
+\item We are 95\% confident that the average waiting time of all patients at this hospital's emergency room is between 128 and 147 minutes.
+
+\item 95\% of random samples have a sample mean between 128 and 147 minutes.
+
+\item A 99\% confidence interval would be narrower than the 95\% confidence interval since we need to be more sure of our estimate.
+
+\item The margin of error is 9.5 and the sample mean is 137.5.
+
+\item In order to decrease the margin of error of a 95\% confidence interval to half of what it is now, we would need to double the sample size.
+
+\end{enumerate}
+
+\item Answer the following questions based on the confidence interval provided above.
+
+\begin{enumerate}
+
+\item A local newspaper claims that the average waiting time at this ER exceeds 3 hours. What do you think of their claim?
+\item The Dean of Medicine at this hospital claims the average wait time is 2.2 hours. What do you think of her claim?
+\item Without actually calculating the interval, determine if the claim of the Dean from part (b) would be considered reasonable based on a 99\% confidence interval?
+\end{enumerate}
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}

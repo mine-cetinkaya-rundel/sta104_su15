@@ -1,0 +1,53 @@
+---
+title: "PROJECT TITLE"
+author: "NAME"
+output:
+  html_document:
+    css: https://stat.duke.edu/courses/Summer15/sta104.01-1/post/projects/project_template.css
+    fig_height: 2.75
+    fig_width: 4
+    highlight: pygments
+    theme: cerulean
+---
+
+```{r include=FALSE, cache=FALSE}
+# DO NOT REMOVE
+# THIS IS FOR SETTING SOME PLOTTING PARAMETERS SO THAT YOUR PLOTS DON'T TAKE UP TOO MUCH SPACE
+# IF YOU WOULD LIKE TO CHANGE THESE, SEE HELP FILES ON THE par() FUNCTION
+# OR ASK FOR HELP
+library(knitr)
+## set global chunk options
+opts_chunk$set(fig.path='figure/manual-', cache.path='cache/manual-', fig.align='center', fig.show='hold', par=TRUE)
+## tune details of base graphics (http://yihui.name/knitr/hooks)
+knit_hooks$set(par=function(before, options, envir){
+if (before && options$fig.show!='none') par(mar=c(4,4,.2,.1),cex.lab=.95,cex.axis=.9,mgp=c(2,.7,0),tcl=-.3)
+})
+```
+
+```{r echo=FALSE}
+# load data
+
+```
+
+
+### Part 1 - Introduction:
+
+
+### Part 2 - Data:
+
+
+### Part 3 - Exploratory data analysis:
+
+
+### Part 4 - Inference:
+
+
+### Part 5 - Conclusion: 
+
+
+### References:
+
+
+### Appendix (optional):
+
+Remove this section if you don't have an appendix

@@ -1,0 +1,116 @@
+\documentclass[12pt]{article}
+\input{../app_style.tex}
+
+%%%%%%%%%%%%%%%%
+% Timing
+%%%%%%%%%%%%%%%%
+
+% 12-15 minutes
+
+%%%%%%%%%%%%%%%%
+% Sakai link for course
+%%%%%%%%%%%%%%%%
+
+% UPDATE FOR OWN COURSE
+% LINK TO ASSIGNMENTS TOOL IN SAKAI
+
+\newcommand{\Sakai}[1]
+{\href{https://sakai.duke.edu/portal/site/ef372254-413e-42f6-b414-f8bc91a58fa0/page/98390abf-b461-44cb-a062-aa6864748ab3}{Sakai}}
+
+%%%%%%%%%%%
+% App Ex number    %
+%%%%%%%%%%%
+
+% DON'T FORGET TO UPDATE
+
+\newcommand{\appno}[1]
+{1.1}
+
+%%%%%%%%%%%%%%
+% Turn on/off solutions       %
+%%%%%%%%%%%%%%
+
+% Off
+\newcommand{\soln}[1]{
+\vskip5pt
+}
+
+%% On
+%\newcommand{\soln}[1]{
+%\textit{\textcolor{custom_darkGray}{#1}}
+%}
+
+%%%%%%%%%%%%%%%%
+% Document
+%%%%%%%%%%%%%%%%
+
+\begin{document}
+\fontspec[Ligatures=TeX]{Helvetica Neue Light}
+
+Dr. \c{C}etinkaya-Rundel \hfill Data Analysis and Statistical Inference \\
+
+\ttl{Application exercise \appno{}: \\
+Scientific studies in the press}
+
+\inst{Submit your responses on \Sakai{}, under the appropriate assignment. Only one submission per team is required. One team will be randomly selected and their responses will be discussed.}
+
+In this activity you will read media coverage of a study published in a peer reviewed journal, and answer a few of question about a study. It is possible that the article doesn't provide the relevant information to answer certain question(s). If so, refer to the original study (linked below). You do not need to read the entire paper, in fact, you are certainly not expected to understand all of it. Simply find the information that will help you answer the questions. \\
+
+\begin{minipage}[c]{0.38\textwidth}
+\textbf{Media coverage:} \\
+{\small
+Haters Are Gonna Hate, Study Confirms \\
+By  Katy Waldman \\
+Published: August 28, 2013 on Slate \\
+Link: \url{http://slate.me/1dr5XPE} \\
+}
+\end{minipage}
+\begin{minipage}[c]{0.38\textwidth}
+\textbf{Original study:} \\
+{\small
+Hepler, J., \& Albarracin, D. (2013). ``Attitudes without objects: Evidence for a dispositional attitude, its measurement, and its consequences". \textit{Journal of personality and social psychology}, 104(6), 1060. \\
+Link: \url{https://sakai.duke.edu/x/oIukKJ} \\
+}
+\end{minipage}
+\begin{minipage}[c]{0.04\textwidth}
+$\:$ \\
+\end{minipage}
+\begin{minipage}[c]{0.2\textwidth}
+\includegraphics[width=0.9\textwidth]{haters.jpg}
+\end{minipage}
+
+\begin{enumerate}
+
+\item What are the cases?
+
+\soln{200 men and women}
+
+\item What is (are) the response variable(s) in this study?
+
+\soln{Attitude towards the microwave oven}
+
+\item What is (are) the explanatory variable(s) in this study?
+
+\soln{Whether the participant is a hater or not}
+
+\item Does the study employ random sampling? How about random assignment?
+
+\soln{Via Amazon's MTurk - self selected sample, no random assignment}
+
+\item Is this an observational study or an experiment? Explain your reasoning.
+
+\soln{Observational, doesn't use random assignment}
+
+\item Can we establish a causal link between the explanatory and response variables?
+
+\soln{No}
+
+\item Can the results of the study be generalized to the population at large?
+
+\soln{No}
+
+\end{enumerate}
+
+
+
+\end{document}

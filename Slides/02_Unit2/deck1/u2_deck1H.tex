@@ -1,0 +1,350 @@
+% -*- TeX-engine: xetex; eval: (auto-fill-mode 0); eval: (visual-line-mode 1); -*-
+% Compile with XeLaTeX
+
+%%%%%%%%%%%%%%%%%%%%%%%
+% To do before class
+%%%%%%%%%%%%%%%%%%%%%%%
+
+% Print off Readiness Assessment 1
+
+% Send email about registering clicker.
+% Test run readiness assessment on iClicker.
+% I need to get scratch off sheet from Mine.
+
+% Send the Logistics/Week0Annoucnement (the night before).
+% Send an email reminding students to bring a charged computer (the night before).
+
+% Questions for Mine
+% Can I get scratch off sheets.
+% What do you do during group portion?
+% Question: voluntary vs. non-response
+
+%%%%%%%%%%%%%%%%%%%%%%%
+% Option 1: Slides: (comment for handouts)   %
+%%%%%%%%%%%%%%%%%%%%%%%
+%
+%\documentclass[slidestop,compress,mathserif,12pt,t,professionalfonts,xcolor=table]{beamer}
+%
+%% solution stuff
+%\newcommand{\solnMult}[1]{
+%\only<1>{#1}
+%\only<2->{\red{\textbf{#1}}}
+%}
+%\newcommand{\soln}[1]{\textit{#1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Option 2: Handouts, without solutions (post before class)    %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+ \documentclass[11pt,containsverbatim,handout,xcolor=xelatex,dvipsnames,table]{beamer}
+
+ % handout layout
+ \usepackage{pgfpages}
+ \pgfpagesuselayout{4 on 1}[letterpaper,landscape,border shrink=5mm]
+
+ % solution stuff
+ \newcommand{\solnMult}[1]{#1}
+ \newcommand{\soln}[1]{}
+
+ % % This breaks things for me for some reason.
+ % tell pgfpages how to set page sizes in XeLaTeX
+ \renewcommand\pgfsetupphysicalpagesizes{%
+    \pdfpagewidth\pgfphysicalwidth\pdfpageheight\pgfphysicalheight%
+ }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Option 3: Handouts, with solutions (may post after class if need be)    %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \documentclass[11pt,containsverbatim,handout,xcolor=xelatex,dvipsnames,table]{beamer}
+
+% % handout layout
+% \usepackage{pgfpages}
+% \pgfpagesuselayout{4 on 1}[letterpaper,landscape,border shrink=5mm]
+
+% % solution stuff
+% \newcommand{\solnMult}[1]{\red{\textbf{#1}}}
+% \newcommand{\soln}[1]{\textit{#1}}
+
+% % % This breaks things for me for some reason.
+% % % tell pgfpages how to set page sizes in XeLaTeX
+% % \renewcommand\pgfsetupphysicalpagesizes{%
+% %    \pdfpagewidth\pgfphysicalwidth\pdfpageheight\pgfphysicalheight%
+% % }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Option 4: Notes Only
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% % See http://tex.stackexchange.com/questions/114219/add-notes-to-latex-beamer
+% \documentclass[10pt,containsverbatim,xcolor=xelatex,dvipsnames,table,notes=only]{beamer}
+
+% % handout layout
+% \usepackage{pgfpages}
+% \pgfpagesuselayout{2 on 1}[letterpaper, landscape, border shrink=5mm]
+
+% % solution stuff
+% \newcommand{\solnMult}[1]{#1}
+% \newcommand{\soln}[1]{}
+
+% % % Having a problem with this.
+% % tell pgfpages how to set page sizes in XeLaTeX
+% % \renewcommand\pgfsetupphysicalpagesizes{%
+% %   \pdfpagewidth\pgfphysicalwidth\pdfpageheight\pgfphysicalheight%
+% %}
+
+%%%%%%%%%%
+% Load style file, defaults  %
+%%%%%%%%%%
+
+\input{../../lec_style.tex}
+\input{../../definitions_default.tex}
+% ALT ALT
+% \input{../../definitions_custom.tex}
+
+%%%%%%%%%%%
+% Cover slide info    %
+%%%%%%%%%%%
+
+\title{Unit 2: Probability and distributions}
+\subtitle{1. Probability and conditional probability}
+\author{Sta 104 - Summer 2015}
+\date{May 19, 2015}
+\institute{Duke University, Department of Statistical Science}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+% Begin document and set Helvetica Neue font   %
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\fontspec[Ligatures=TeX]{Helvetica Neue Light}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Title Page
+
+\begin{frame}[plain]
+
+\titlepage
+\vfill
+{\scriptsize \webLink{\PersonalSite}{Dr. \LastName{}} \hfill Slides posted at  \webLink{\CourseSite}{\CourseSite}}
+\addtocounter{framenumber}{-1} 
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Housekeeping}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Feedback from Lab and PS}
+
+\begin{itemize}
+
+\item Lab: Put your code in R chunks so that the markdown can process it as code and produce the desired output and plots.
+
+\item PS1: 
+\begin{itemize}
+\item 1.6 (c): How is income recorded? (Under 2,600; 10,400 to 15,600; above 36,400; ...)
+\item 1.14 (b): What type of a sample is it if you only ask your friends to respond?
+\item 1.46 (c): Is the histogram or the intensity map more informative?
+\end{itemize}
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{RA 2}
+
+\begin{itemize}
+
+\item 15 min individual
+
+\item 10 min teams
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Main ideas}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Disjoint and independent do not mean the same thing}
+\label{mi1}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{1. Disjoint and independent do not mean the same thing}
+
+\begin{itemize}
+
+\item \hl{Disjoint (mutually exclusive) events} cannot happen at the same time
+\begin{itemize}
+\item A voter cannot register as a Democrat and a Republican at the same time
+\item But s/he might be a Republican and a Moderate at the same time -- \hl{non-disjoint events}
+\item For disjoint A and B: $P(A~and~B) = 0$
+\end{itemize}
+
+\pause
+
+\item If A and B are \hl{independent events}, having information on A does not tell us anything about B (and vice versa)
+\begin{itemize}
+\item If A and B are independent: 
+\begin{itemize}
+\item $P(A~|~B) = P(A)$
+\item $P(A~and~B) = P(A) \times P(B)$
+\end{itemize}
+\end{itemize}
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Application of the addition rule depends on disjointness of events}
+\label{mi2}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{2. Application of the addition rule depends on disjointness of events}
+
+\begin{itemize}
+
+\item \hl{General addition rule:} P(A or B) = P(A) + P(B) - P(A and B)
+
+\item A or B = either A or B or both
+
+\end{itemize}
+
+\vspace{0.5cm}
+
+\pause
+
+\twocol{0.5}{0.5}{
+\textbf{disjoint events:} \\
+P(A or B) \\
+= P(A) + P(B) - P(A and B) \\
+= 0.4 + 0.3 - 0 = 0.7
+\begin{center}
+\includegraphics[width = 0.9\textwidth]{figures/venn/venn_disjoint}
+\end{center}
+}
+{
+\pause
+\textbf{non-disjoint events:} \\
+P(A or B) \\
+= P(A) + P(B) - P(A and B) \\
+= 0.4 + 0.3 - 0.02 = 0.68
+\begin{center}
+\includegraphics[width = 0.9\textwidth]{figures/venn/venn_non_disjoint}
+\end{center}
+}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Bayes' theorem works for all types of events}
+\label{mi3}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{3. Bayes' theorem works for all types of events}
+
+\begin{itemize}
+
+\item \hl{Bayes' theorem:} $P(A~|~B) = \frac{P(A~and~B)}{P(B)}$
+
+\pause
+
+\item ... can be rewritten as: $P(A~and~B) = P(A~|~B) \times P(B)$
+
+\end{itemize}
+
+\pause
+
+\vspace{0.5cm}
+
+\twocol{0.5}{0.5}{
+\textbf{disjoint events:}
+
+\begin{itemize}
+\item We know P(A $|$ B) = 0, since if B happened A could not have happened
+\pause
+\item P(A and B) \\
+= P(A $|$ B) $\times$ P(B) \\
+\pause
+= \red{0} $\times$ P(B) = 0
+\end{itemize}
+}
+{
+\pause
+
+\textbf{independent events:}
+
+\begin{itemize}
+\item We know P(A $|$ B) = P(A), since knowing B doesn't tell us anything about A
+\pause
+\item P(A and B) \\
+= P(A $|$ B) $\times$ P(B) \\
+\pause
+= \red{P(A)} $\times$ P(B)
+\end{itemize}
+}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{}
+
+\vfill
+
+\app{2.1 Probability and conditional probability}{$\:$\\ See the course website for instructions. \\$\:$}
+
+\vfill
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Summary}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Summary of main ideas}
+
+\vfill
+
+\begin{enumerate}
+
+\item \nameref{mi1}
+
+\item \nameref{mi2}
+
+\item \nameref{mi3}
+
+\end{enumerate}
+
+\vfill
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}

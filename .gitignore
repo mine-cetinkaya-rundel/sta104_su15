@@ -1,0 +1,17 @@
+*.aux
+*.log
+*.nav
+*.out
+*.snm
+*.synctex.gz(busy)
+*.toc
+*.vrb
+*.DS_Store
+*.Rhistory
+*.key
+*Key.Rmd
+*Key.html
+*.dropbox
+Private/
+mc301@stat.duke.edu
+*.dropbox

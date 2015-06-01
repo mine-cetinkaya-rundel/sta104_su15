@@ -1,0 +1,75 @@
+\documentclass[11pt]{article}
+\input{../app_style.tex}
+
+%%%%%%%%%%%%%%%%
+% Timing
+%%%%%%%%%%%%%%%%
+
+% 12-15 minutes
+
+%%%%%%%%%%%%%%%%
+% Sakai link for course
+%%%%%%%%%%%%%%%%
+
+% UPDATE FOR OWN COURSE
+% LINK TO ASSIGNMENTS TOOL IN SAKAI
+
+\newcommand{\Sakai}[1]
+{\href{https://sakai.duke.edu/portal/site/ba0d1c18-ba55-473f-9d70-b6a1f9559bbe/page/9870858b-a1a9-481e-8497-8a6ffe9e5be2}{Sakai}}
+
+%%%%%%%%%%%
+% App Ex number    %
+%%%%%%%%%%%
+
+% DON'T FORGET TO UPDATE
+
+\newcommand{\appno}[1]
+{2.4}
+
+%%%%%%%%%%%%%%
+% Turn on/off solutions       %
+%%%%%%%%%%%%%%
+
+% Off
+\newcommand{\soln}[1]{
+\vskip5pt
+}
+
+%% On
+%\newcommand{\soln}[1]{
+%\textit{\textcolor{custom_darkGray}{#1}}
+%}
+
+%%%%%%%%%%%%%%%%
+% Document
+%%%%%%%%%%%%%%%%
+
+\begin{document}
+\fontspec[Ligatures=TeX]{Helvetica Neue Light}
+
+Dr. \c{C}etinkaya-Rundel \hfill Data Analysis and Statistical Inference \\
+
+\ttl{Application exercise \appno{}: \\
+Binomial distribution}
+
+\inst{Submit your responses on \Sakai{}, under the appropriate assignment. Only one submission per team is required. One team will be randomly selected and their responses will be discussed.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Gallup defines engaged employees as those who are involved in, enthusiastic about and committed to their work and workplace. Gallup categorizes workers as engaged based on their responses to key workplace elements it has found to predict important organizational performance outcomes. According to a recent Gallup poll, only 31.5\% of US employees were engaged in their jobs.\footnote{\url{http://www.gallup.com/poll/181289/majority-employees-not-engaged-despite-gains-2014.aspx?utm_source=EMPLOYEE_ENGAGEMENT&utm_medium=topic&utm_campaign=tiles}} Suppose that a company employs 1,000 people.
+
+\begin{enumerate}
+
+\item Calculate a range for the plausible number of employees in this sample who are engaged in their jobs. Assume the employees at this company are no different than the average US employee.
+
+\item This company claims that at least 35\% of their employees are engaged. Answer this question using two approaches:
+\begin{enumerate}
+\item Use the exact binomial probabilities. \textit{Hint:} Computation will be your friend for this part, you \textit{do not} want to do this by hand.
+\item Use the normal approximation to the binomial.
+\end{enumerate}
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}

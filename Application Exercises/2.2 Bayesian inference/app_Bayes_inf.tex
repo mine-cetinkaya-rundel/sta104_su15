@@ -1,0 +1,88 @@
+% -*- TeX-engine: xetex; -*-
+\documentclass[11pt]{article}
+\input{../app_style.tex}
+
+%%%%%%%%%%%%%%%%
+% Timing
+%%%%%%%%%%%%%%%%
+
+% 12-15 minutes
+
+%%%%%%%%%%%%%%%%
+% Sakai link for course
+%%%%%%%%%%%%%%%%
+
+% UPDATE FOR OWN COURSE
+% LINK TO ASSIGNMENTS TOOL IN SAKAI
+
+\newcommand{\Sakai}[1]
+{\href{https://sakai.duke.edu/portal/site/ba0d1c18-ba55-473f-9d70-b6a1f9559bbe/page/9870858b-a1a9-481e-8497-8a6ffe9e5be2}{Sakai}}
+% ALT ALT
+%\renewcommand{\Sakai}[1]{\href{https://sakai.duke.edu/portal/site/8d786209-ab9d-4d66-9a00-e138eaadd9c9/page/ad6d459a-be57-45d6-b0f1-13a3fa28b8ea}{Sakai}}
+
+%%%%%%%%%%%
+% App Ex number    %
+%%%%%%%%%%%
+
+% DON'T FORGET TO UPDATE
+
+\newcommand{\appno}[1]
+{2.2}
+
+%%%%%%%%%%%%%%
+% Turn on/off solutions       %
+%%%%%%%%%%%%%%
+
+% Off
+\newcommand{\soln}[1]{
+\vskip5pt
+}
+
+%% On
+%\newcommand{\soln}[1]{
+%\textit{\textcolor{custom_darkGray}{#1}}
+%}
+
+%%%%%%%%%%%%%%%%
+% Document
+%%%%%%%%%%%%%%%%
+
+\begin{document}
+\fontspec[Ligatures=TeX]{Helvetica Neue Light}
+
+Dr. \c{C}etinkaya-Rundel \hfill Data Analysis and Statistical Inference \\
+
+\ttl{Application exercise \appno{}: \\
+Bayesian inference for drug testing}
+
+\inst{Submit your responses on \Sakai{}, under the appropriate assignment. Only one submission per team is required. One team will be randomly selected and their responses will be discussed.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Most companies drug test their employees before they start employment, and sometimes regularly during their employment as well.
+
+Suppose that a drug test for an illegal drugs is 97\% accurate in the case of a user of that drug, and 92\% accurate in the case of a non-user for that drug.
+
+Suppose also that 5\% of the entire population uses that drug.
+
+Show all your work when answering the questions below.
+
+\begin{enumerate}
+
+\item You are the hiring manager at a company that drug tests their employees. You have recently decided to hire a new employee. What is the prior probability that this employee is a user of this drug? (You may assume that this prospective employee is a randomly drawn person from the population.)
+
+\item The prospective employee gets drug tested, and the test comes out to be positive. What is the probability that they are actually a user for the drug? What is this probability called? Make sure to sketch a probability tree, and upload to Sakai as an attachment.
+
+\item When the employee finds out that they tested positive, they refuse the test results, and say they would like to be tested again. What is the new prior probability you should use for this employee being a user of this drug?
+
+\item The employee tests positive again in the second test. Should the new probability of them actually being a user of this drug be higher or lower than what you calculated before, or the same? Answer this question before you actually complete the calculations.
+
+\item Finally, calculate the new updated probability that this employee is a user of this drug. Make sure to sketch a probability tree, take a picture, and upload to Sakai as an attachment.
+
+\item Based on these results, would you hire this employee? Why or why not?
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}

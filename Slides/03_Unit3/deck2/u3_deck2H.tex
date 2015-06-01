@@ -1,0 +1,447 @@
+% -*- TeX-engine: xetex; eval: (auto-fill-mode 0); eval: (visual-line-mode 1); -*-
+% Compile with XeLaTeX
+
+%%%%%%%%%%%%%%%%%%%%%%%
+% To do before class
+%%%%%%%%%%%%%%%%%%%%%%%
+
+% Print off Readiness Assessment 1
+
+% Send email about registering clicker.
+% Test run readiness assessment on iClicker.
+% I need to get scratch off sheet from Mine.
+
+% Send the Logistics/Week0Annoucnement (the night before).
+% Send an email reminding students to bring a charged computer (the night before).
+
+% Questions for Mine
+% Can I get scratch off sheets.
+% What do you do during group portion?
+% Question: voluntary vs. non-response
+
+%%%%%%%%%%%%%%%%%%%%%%%
+% Option 1: Slides: (comment for handouts)   %
+%%%%%%%%%%%%%%%%%%%%%%%
+
+%\documentclass[slidestop,compress,mathserif,12pt,t,professionalfonts,xcolor=table]{beamer}
+%
+%% solution stuff
+%\newcommand{\solnMult}[1]{
+%\only<1>{#1}
+%\only<2->{\red{\textbf{#1}}}
+%}
+%\newcommand{\soln}[1]{\textit{#1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Option 2: Handouts, without solutions (post before class)    %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+ \documentclass[11pt,containsverbatim,handout,xcolor=xelatex,dvipsnames,table]{beamer}
+
+ % handout layout
+ \usepackage{pgfpages}
+ \pgfpagesuselayout{4 on 1}[letterpaper,landscape,border shrink=5mm]
+
+ % solution stuff
+ \newcommand{\solnMult}[1]{#1}
+ \newcommand{\soln}[1]{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Option 3: Handouts, with solutions (may post after class if need be)    %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \documentclass[11pt,containsverbatim,handout,xcolor=xelatex,dvipsnames,table]{beamer}
+
+% % handout layout
+% \usepackage{pgfpages}
+% \pgfpagesuselayout{4 on 1}[letterpaper,landscape,border shrink=5mm]
+
+% % solution stuff
+% \newcommand{\solnMult}[1]{\red{\textbf{#1}}}
+% \newcommand{\soln}[1]{\textit{#1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Option 4: Notes Only
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% % See http://tex.stackexchange.com/questions/114219/add-notes-to-latex-beamer
+% \documentclass[10pt,containsverbatim,xcolor=xelatex,dvipsnames,table,notes=only]{beamer}
+
+% % handout layout
+% \usepackage{pgfpages}
+% \pgfpagesuselayout{2 on 1}[letterpaper, landscape, border shrink=5mm]
+
+% % solution stuff
+% \newcommand{\solnMult}[1]{#1}
+% \newcommand{\soln}[1]{}
+
+% % % Having a problem with this.
+% % tell pgfpages how to set page sizes in XeLaTeX
+% % \renewcommand\pgfsetupphysicalpagesizes{%
+% %   \pdfpagewidth\pgfphysicalwidth\pdfpageheight\pgfphysicalheight%
+% %}
+
+%%%%%%%%%%
+% Load style file, defaults  %
+%%%%%%%%%%
+
+\input{../../lec_style.tex}
+\input{../../definitions_default.tex}
+% ALT ALT
+% \input{../../definitions_custom.tex}
+
+%%%%%%%%%%%
+% Cover slide info    %
+%%%%%%%%%%%
+
+\title{Unit 3: Foundations for inference}
+\subtitle{2. Confidence intervals and hypothesis tests}
+\author{Sta 104 - Summer 2015}
+\date{May 27, 2015}
+\institute{Duke University, Department of Statistical Science}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+% Begin document and set Helvetica Neue font   %
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\fontspec[Ligatures=TeX]{Helvetica Neue Light}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Title Page
+
+\begin{frame}[plain]
+
+\titlepage
+\vfill
+{\scriptsize \webLink{\PersonalSite}{Dr. \LastName{}} \hfill Slides posted at  \webLink{\CourseSite}{\CourseSite}}
+\addtocounter{framenumber}{-1} 
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Housekeeping}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Announcements}
+
+\begin{itemize}
+
+\item Peer evals - please complete asap after class today
+
+\item PS2 feedback:
+\begin{itemize}
+\item 2.8 (b) - Venn diagrams: intersection is P(A and B), and this value should be subtracted from the values show outside the intersection so that the total probability in the circle for an event adds up to that event's marginal probability.
+\item 3.16 -
+\begin{align*}
+P(X>2100 | X>1900) &= \frac{P(X > 2100 ~and~ X>1900)}{P(X > 1900)} \\
+&= \frac{P(X > 2100)}{P(X > 1900)} 
+\end{align*}
+\item Pay attention to which problems are assigned
+\end{itemize}
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Main ideas}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Use hypothesis tests to make decisions about population parameters}
+\label{mi1}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{1. Use hypothesis tests to make decisions about population parameters}
+
+Hypothesis testing framework:
+
+\begin{enumerate}
+
+\item Set the hypotheses.
+
+\item Check assumptions and conditions.
+
+\item Calculate a \hl{test statistic} and a p-value.
+
+\item Make a decision, and interpret it in context of the research question.
+
+\end{enumerate}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Hypothesis testing for a population mean}
+
+\begin{enumerate}
+
+\item Set the hypotheses
+\begin{itemize}
+\item $H_0: \mu = null~value$
+\item $H_A: \mu <$ or $>$ or $\ne null~value$
+\end{itemize}
+
+\pause
+
+\item Check assumptions and conditions
+\begin{itemize}
+\item Independence: random sample/assignment, 10\% condition when sampling without replacement
+\item Sample size / skew: $n \ge 30$ (or larger if sample is skewed), no extreme skew
+\end{itemize}
+
+\pause
+
+\item Calculate a \hl{test statistic} and a p-value (draw a picture!)
+\[ Z = \frac{\bar{x} - \mu}{SE},~where~SE = \frac{s}{\sqrt{n}} \]
+
+\pause
+
+\item Make a decision, and interpret it in context of the research question
+\begin{itemize}
+\item If p-value $< \alpha$, reject $H_0$, data provide evidence for $H_A$
+\item If p-value $> \alpha$, do not reject $H_0$, data do not provide evidence for $H_A$
+\end{itemize}
+
+\end{enumerate}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{}
+
+\vfill
+
+\app{3.2 Hypothesis testing for a single mean}{See course website for details.}
+
+\vfill
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+
+\clicker{Which of the following is the correct interpretation of the p-value from App Ex 3.2?}
+
+\begin{enumerate}[(a)]
+\item The probability that average GPA of Duke students has changed since 2001.
+\item The probability that average GPA of Duke students has not changed since 2001.
+\item The probability that average GPA of Duke students has not changed since 2001, if in fact a random sample of 63 Duke students this year have an average GPA of 3.58 or higher.
+\item The probability that a random sample of 63 Duke students have an average GPA of 3.58 or higher, if in fact the average GPA has not changed since 2001.
+\item \solnMult{The probability that a random sample of 63 Duke students have an average GPA of 3.58 or higher or 3.16 or lower, if in fact the average GPA has not changed since 2001.}
+\end{enumerate}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Common misconceptions about hypothesis testing}
+
+\begin{enumerate}
+
+\item \textcolor{gray}{P-value is the probability that the null hypothesis is true} \\
+\textit{A p-value is the probability of getting a sample that results in a test statistic as or more extreme than what you actually observed (in the direction of $H_A$, if in fact $H_0$ is correct. It is a conditional probability, conditioned on $H_0$ being correct.} \\
+$\:$ \\
+
+\pause
+
+\item  \textcolor{gray}{A high p-value confirms the null hypothesis.}\\
+\textit{A high p-value means the data do not provide convincing evidence for $H_A$ and hence that $H_0$ can't be rejected.} \\
+$\:$ \\
+
+\pause
+
+\item   \textcolor{gray}{A low p-value confirms the alternative hypothesis.} \\
+\textit{A low p-value means the data provide convincing evidence for $H_A$, but not necessarily that it is confirmed.} \\
+
+\end{enumerate}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Exercises}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Sample vs. sampling distributions}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{}
+
+\clicker{
+{\footnotesize Four plots: Determine which plot (A, B, or C) is which. \\
+(1) At top: distribution for a population ($\mu = 60, \sigma = 18$), \\
+(2) a single random sample of 500 observations from this population, \\
+(3) a distribution of 500 sample means from random samples with size 18,  \\
+(4) a distribution of 500 sample means from random samples with size 81.}}
+
+\twocol{0.4}{0.6}{
+\includegraphics[width=\textwidth]{figures/cltSimLS/cltSimLS_pop}
+}
+{
+\vspace{-0.5cm}
+{\small
+\begin{enumerate}[(a)]
+\item (2) - B; (3) - A; (4) - C
+\item (2) - A; (3) - B; (4) - C
+\item (2) - C; (3) - A; (4) - D
+\item \solnMult{(2) - B; (3) - C; (4) - A}
+\end{enumerate}
+}
+}
+\vspace{-0.25cm}
+\includegraphics[width=0.32\textwidth]{figures/cltSimLS/cltSimLS_n81}
+\includegraphics[width=0.32\textwidth]{figures/cltSimLS/cltSimLS_samp}
+\includegraphics[width=0.32\textwidth]{figures/cltSimLS/cltSimLS_n18}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+
+\disc{{\small A housing survey was conducted to determine the price of a typical home in Topanga, CA. The mean price of a house was roughly \$1.3 million with a standard deviation of \$300,000. There were no houses listed below \$600,000 but a few houses above \$3 million.}}
+
+\disc{{\small Would you expect most houses in Topanga to cost more or less than \$1.3 million? Hint: What is most likely the shape of this distribution?}}
+
+\pause
+
+\soln{Since the distribution is probably right skewed, the median would be less than the mean, and a majority of observations would be lower than the mean.}
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Working with the CLT}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+
+\disc{{\small A housing survey was conducted to determine the price of a typical home in Topanga, CA. The mean price of a house was roughly \$1.3 million with a standard deviation of \$300,000. There were no houses listed below \$600,000 but a few houses above \$3 million.}}
+
+\clicker{Can we estimate the probability that a randomly chosen house in Topanga costs more than \$1.4 million using the normal distribution?}
+
+\begin{enumerate}[(a)]
+\item yes
+\item \solnMult{no}
+\end{enumerate}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+
+\disc{{\small A housing survey was conducted to determine the price of a typical home in Topanga, CA. The mean price of a house was roughly \$1.3 million with a standard deviation of \$300,000. There were no houses listed below \$600,000 but a few houses above \$3 million.}}
+
+\clicker{Can we estimate the probability that the mean of 60 randomly chosen houses in Topanga is more than \$1.4 million?}
+
+\begin{enumerate}[(a)]
+\item \solnMult{yes}
+\item no
+\end{enumerate}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+
+\disc{{\small A housing survey was conducted to determine the price of a typical home in Topanga, CA. The mean price of a house was roughly \$1.3 million with a standard deviation of \$300,000. There were no houses listed below \$600,000 but a few houses above \$3 million.}}
+
+\disc{{\small What is the probability that the mean of 60 randomly chosen houses in Topanga is more than \$1.4 million?}}
+
+\pause
+
+In order to calculate $P(\bar{X} > 1.4~mil)$, we need to first determine the distribution of $\bar{X}$. According to the CLT,
+
+\pause
+
+\[ \bar{X} \pause \sim N \pause \left( mean = 1.3, \pause SE = \frac{0.3}{\sqrt{60}} = 0.0387 \right) \]
+
+\pause
+
+\begin{eqnarray*}
+P(\bar{X} > 1.4 ) &=& P\left(Z > \frac{1.4 - 1.3}{0.0387}\right) \\
+\pause
+&=& P(Z > 2.58) \\
+\pause
+&=& 1 - 0.9951 \pause =  0.0049
+\end{eqnarray*}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Inference for a mean - mechanics}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+
+\vfill
+
+\app{3.3 Inference for a mean - mechanics}{See course website for details.}
+
+\vfill
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Inference for a mean - interpretations}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+
+\vfill
+
+\app{3.4 Inference for a mean - interpretations}{See course website for details.}
+
+\vfill
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Summary}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Summary of main ideas}
+
+\vfill
+
+\begin{enumerate}
+
+\item \nameref{mi1}
+
+\end{enumerate}
+
+\vfill
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}

@@ -1,0 +1,89 @@
+\documentclass[11pt]{article}
+\input{../app_style.tex}
+
+%%%%%%%%%%%
+% App Ex number    %
+%%%%%%%%%%%
+
+% DON'T FORGET TO UPDATE
+
+\newcommand{\appno}[1]
+{4.4}
+
+%%%%%%%%%%%%%%
+% Turn on/off solutions       %
+%%%%%%%%%%%%%%
+
+% Off
+\newcommand{\soln}[1]{
+\vskip5pt
+}
+
+%% On
+%\newcommand{\soln}[1]{
+%\textit{\textcolor{custom_darkGray}{#1}}
+%}
+
+%%%%%%%%%%%%%%%%
+% Document
+%%%%%%%%%%%%%%%%
+
+\begin{document}
+\fontspec[Ligatures=TeX]{Helvetica Neue Light}
+
+Dr. \c{C}etinkaya-Rundel \hfill Data Analysis and Statistical Inference \\
+
+\ttl{Application exercise \appno{}: \\
+Comparing two means, Part 2}
+
+\inst{Submit your responses on \Sakai{}, under the appropriate assignment. Only one submission per team is required. One team will be randomly selected and their responses will be discussed.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Since 2005, the American Community Survey polls $\sim$3.5 million households yearly. The following summarizes distribution of salaries of males and females from a random sample of individuals who responded to the 2012 ACS:
+
+\begin{center}
+%
+{\small
+\begin{tabular}{lccc}
+\hline
+			& $\bar{x}$ 	& $s$	& $n$ \\
+\hline
+male			& 55,890		& 68,767.88	& 470 \\
+female		& 29,240		& 32,025.98	& 373 \\
+\hline
+\end{tabular}
+}
+%
+\includegraphics[width=0.9\textwidth]{figures/acs/sal_gen_box}
+\end{center}
+We want to evaluate whether salaries of men and women are different, on average.
+
+\begin{enumerate}
+
+\item Define the parameter of interest and the point estimate and calculate the point estimate.
+
+\item Conduct a hypothesis test answering the research question. Don't forget to check conditions first. Use $\alpha = 0.10$. Make sure to frame your conclusion in context of the data and the research question.
+
+\item Calculate a confidence interval for the parameter of interest at the confidence level equivalent to the previous hypothesis test. Make sure to interpret the interval in context of the research question.
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

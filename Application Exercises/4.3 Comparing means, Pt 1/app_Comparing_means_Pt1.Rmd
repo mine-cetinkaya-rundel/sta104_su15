@@ -1,0 +1,30 @@
+---
+title: "App Ex - Comparing means, Pt 1"
+author: "[Enter team name here]"
+output:
+  html_document:
+    fig_height: 4
+    fig_width: 6
+---
+
+**Load data:**
+```{r}
+
+```
+
+* * *
+
+#### Exercise 1: 
+
+
+#### Exercise 2:
+
+
+#### Exercise 3:
+
+
+#### Exercise 4:
+
+
+#### Exercise 5:
+

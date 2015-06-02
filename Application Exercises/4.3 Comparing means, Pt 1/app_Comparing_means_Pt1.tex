@@ -1,0 +1,106 @@
+% -*- TeX-engine: xetex; -*-
+
+\documentclass[11pt]{article}
+\input{../app_style.tex}
+
+%%%%%%%%%%%
+% App Ex number    %
+%%%%%%%%%%%
+
+% DON'T FORGET TO UPDATE
+
+\newcommand{\appno}[1]
+{4.3}
+
+%%%%%%%%%%%%%%
+% Turn on/off solutions       %
+%%%%%%%%%%%%%%
+
+% Off
+\newcommand{\soln}[1]{
+\vskip5pt
+}
+
+%% On
+%\newcommand{\soln}[1]{
+%\textit{\textcolor{custom_darkGray}{#1}}
+%}
+
+%%%%%%%%%%%%%%%%
+% Document
+%%%%%%%%%%%%%%%%
+
+\begin{document}
+\fontspec[Ligatures=TeX]{Helvetica Neue Light}
+
+Dr. \c{C}etinkaya-Rundel \hfill Data Analysis and Statistical Inference \\
+
+\ttl{Application exercise \appno{}: \\
+Comparing two means, Part 1}
+
+\inst{Submit your responses on \Sakai{}, under the appropriate assignment. Only one submission per team is required. One team will be randomly selected and their responses will be discussed.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Trace metals in drinking water affect the flavor and an unusually high concentration can pose a health hazard. Ten pairs of data were taken measuring zinc concentration in bottom water and surface water at 10 randomly sampled locations. The distributions are shown below. We want to evaluate whether the true average concentration in the bottom water \emph{exceeds} that of surface water? Note that water samples collected at the same location, on the surface and in the bottom, cannot be assumed to be independent of each other.
+
+\begin{center}
+\includegraphics[width=0.35\textwidth]{figures/zinc/zinc_bottom_hist}
+\includegraphics[width=0.35\textwidth]{figures/zinc/zinc_surface_hist}
+\end{center}
+
+To complete this application exercise you will need various sample statistics. You can calculate these in R using the raw data. The dataset can be loaded using the following command:
+\begin{verbatim}
+download("http://stat.duke.edu/~mc301/data/zinc.csv", destfile = "zinc.csv")
+zinc = read.csv("zinc.csv")
+\end{verbatim}
+
+Also download the RMarkdown template and complete this application exercise in RMarkdown. 
+\begin{verbatim}
+download("https://stat.duke.edu/courses/Summer15/sta104.01-1/post/app/Comparing_means_Pt1.Rmd",
+   destfile = "Comparing_means_Pt1.Rmd")
+\end{verbatim}
+
+\textbf{Turn in the Rmd and the HTML files for your submission.} \\
+
+\begin{enumerate}
+
+\item Define the parameter of interest and the point estimate and calculate the point estimate.
+
+\item Conduct a hypothesis test answering the research question. Don't forget to check conditions first. Use $\alpha = 0.05$. Make sure to frame your conclusion in context of the data and the research question.
+
+\item Calculate a confidence interval for the parameter of interest at the confidence level equivalent to the previous hypothesis test. Make sure to interpret the interval in context of the research question.
+
+\item Describe how you would construct this interval using bootstrapping and the standard error method.
+
+\item Construct the bootstrap interval and compare it to the theoretical interval you calculated earlier.
+
+\end{enumerate}
+
+
+%\begin{tabular}{c | c | c | c}
+%		& bottom	& surface	& difference \\
+%\hline
+%$\bar{x}$	& 0.5649	& 0.4845	& 0.0804 \\
+%$s$		& 0.1468	& 0.1312	& 0.0523 \\
+%$n$		& 10		& 10		& 10
+%\end{tabular}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

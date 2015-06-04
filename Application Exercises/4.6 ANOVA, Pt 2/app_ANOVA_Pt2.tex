@@ -1,0 +1,120 @@
+% -*- TeX-engine: xetex; eval: (auto-fill-mode 0); eval: (visual-line-mode 1); -*-
+% Compile with XeLaTeX
+
+\documentclass[11pt]{article}
+\input{../app_style.tex}
+
+%%%%%%%%%%%
+% App Ex number    %
+%%%%%%%%%%%
+
+% DON'T FORGET TO UPDATE
+
+\newcommand{\appno}[1]
+{4.6}
+
+%%%%%%%%%%%%%%
+% Turn on/off solutions       %
+%%%%%%%%%%%%%%
+
+% Off
+\newcommand{\soln}[1]{
+\vskip5pt
+}
+
+%% On
+%\newcommand{\soln}[1]{
+%\textit{\textcolor{custom_darkGray}{#1}}
+%}
+
+%%%%%%%%%%%%%%%%
+% Document
+%%%%%%%%%%%%%%%%
+
+\begin{document}
+\fontspec[Ligatures=TeX]{Helvetica Neue Light}
+
+Dr. \c{C}etinkaya-Rundel \hfill Data Analysis and Statistical Inference \\
+
+\ttl{Application exercise \appno{}: \\
+ANOVA - Part 2}
+
+\inst{Submit your responses on \Sakai{}, under the appropriate assignment. Only one submission per team is required. One team will be randomly selected and their responses will be discussed.}
+
+
+\section*{How quickly can you ``Where's Waldo?"}
+
+An experiment run by a British video-game manufacturer in an attempt to calibrate the level of difficulty of certain tasks in a video game asked presented subjects with a simple ``Where's Waldo?"-style visual scene. The subjects had to find a number (1 or 2) floating somewhere in the scene, to identify the number, and to press the corresponding button as quickly as possible. The response variable is their reaction time.
+
+\begin{center}
+{\small
+\begin{tabular}{rrrrr}
+  \hline
+ & Subject & PictureTarget.RT & Littered & FarAway \\ 
+  \hline
+1 &  10 & 635 &   0 &   0 \\ 
+  2 &  10 & 1144 &   0 &   0 \\ 
+  3 &  10 & 570 &   0 &   0 \\ 
+  4 &  10 & 589 &   0 &   0 \\ 
+  5 &  10 & 754 &   0 &   0 \\ 
+  6 &  10 & 601 &   0 &   0 \\ 
+  ... \\
+   \hline
+\end{tabular}
+}
+\end{center}
+
+\begin{itemize}
+\item \texttt{PictureTarget.RT}: the subject's reaction time in milliseconds.
+\item \texttt{Subject}: a numerical identifier for the subject undergoing the test.
+\item \texttt{FarAway}: was the number to be identified far away (1) or near (0) in the visual scene?
+\item \texttt{Littered}: the British way of saying whether the scene was cluttered (1) or mostly free of clutter (0).
+\end{itemize}
+
+The ANOVA output is shown below:
+
+\begin{center}
+\begin{tabular}{lrrrrr}
+  \hline
+ & Df & Sum Sq & Mean Sq & F value & Pr($>$F) \\ 
+  \hline
+rxntime\$Subject & 11 & 4060822.10 & 369165.65 & 20.05 & 0.0000 \\ 
+  Residuals & 1908 & 35129401.48 & 18411.64 &  &  \\ 
+   \hline
+\end{tabular}
+\end{center}
+
+%
+
+\begin{enumerate}
+
+\item What percent of variability in reaction times is explained by differences between subjects?
+
+\item We want to determine which means are different from each other. What significance level should we use for these tests and why?
+
+\item Sample statistics for Subject 6 and Subject 8 are shown below. Use these to evaluate whether the mean reaction time for these two subjects is different. \textit{Hint:} You're doing a post-hoc pairwise test, how are $SE$ and $df$ defined?
+
+\begin{center}
+\begin{tabular}{lll}
+  \hline
+ & Subject 6 & Subject 8 \\ 
+  \hline
+  mean & 628.57 & 539.05 \\ 
+  sd & 189.76 & 110.67 \\ 
+  n & 160 & 160 \\ 
+   \hline
+\end{tabular}
+\end{center}
+
+%\item BONUS [time permitting]: Load the dataset and conduct the ANOVA using the \texttt{inference} function. Note that the first variable is the response, and the second variable is the explanatory variable. For the rest of the necessary arguments the function should give you errors that lead you in the right direction. Copy and paste your code + output, and confirm the p-value for your pairwise t-test from the previous question.
+%
+%\begin{verbatim}
+%download("http://stat.duke.edu/~mc301/data/rxntime.csv", destfile = "rxntime.csv")
+%rxntime = read.csv("rxntime.csv")
+%\end{verbatim}
+
+\end{enumerate}
+
+%
+
+\end{document}

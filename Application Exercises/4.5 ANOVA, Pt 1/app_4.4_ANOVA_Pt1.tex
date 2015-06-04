@@ -1,0 +1,94 @@
+% -*- TeX-engine: xetex; eval: (auto-fill-mode 0); eval: (visual-line-mode 1); -*-
+% Compile with XeLaTeX
+
+\documentclass[11pt]{article}
+\input{../app_style.tex}
+
+%%%%%%%%%%%
+% App Ex number    %
+%%%%%%%%%%%
+
+% DON'T FORGET TO UPDATE
+
+\newcommand{\appno}[1]
+{4.5}
+
+%%%%%%%%%%%%%%
+% Turn on/off solutions       %
+%%%%%%%%%%%%%%
+
+% Off
+\newcommand{\soln}[1]{
+\vskip5pt
+}
+
+%% On
+%\newcommand{\soln}[1]{
+%\textit{\textcolor{custom_darkGray}{#1}}
+%}
+
+%%%%%%%%%%%%%%%%
+% Document
+%%%%%%%%%%%%%%%%
+
+\begin{document}
+\fontspec[Ligatures=TeX]{Helvetica Neue Light}
+
+Dr. \c{C}etinkaya-Rundel \hfill Data Analysis and Statistical Inference \\
+
+\ttl{Application exercise \appno{}: \\
+ANOVA - Part 1}
+
+\inst{Submit your responses on \Sakai{}, under the appropriate assignment. Only one submission per team is required. One team will be randomly selected and their responses will be discussed.}
+
+\section*{Teacher evaluations}
+
+Many college courses conclude by giving students the opportunity to evaluate the course and the instructor anonymously. In this application exercise we evaluate whether the teaching evaluations for instructors vary by their rank: teaching, tenure track, and tenured. Note that the instructors are evaluated on a 1-5 scale (1-low, 5-high).
+
+The data come from ``Beauty in the classroom: instructors' pulchritude and putative pedagogical productivity'' (Hamermesh and Parker, 2005) found that instructors who are viewed to be better looking receive higher instructional ratings.\footnote{Daniel S. Hamermesh, Amy Parker, Beauty in the classroom: instructorsÕ pulchritude and putative pedagogical productivity, \textit{Economics of Education Review}, Volume 24, Issue 4, August 2005, Pages 369-376, ISSN 0272-7757, 10.1016/j.econedurev.2004.07.013. (\href{http://www.sciencedirect.com/science/article/pii/S0272775704001165}{http://www.sciencedirect.com/science/article/pii/S0272775704001165}).}, which is a dataset we will work with again later in the course.
+
+\begin{center}
+\begin{tabular}{l | c | c | c | c | c | c | c | c}
+		& Min. & 1st Qu. & Median  &  Mean & 3rd Qu. &   Max. & Std. Dev. & n \\
+\hline
+teaching	&  3.300 &  3.900  & 4.400&   4.284 &  4.700&   5.000 	& 0.5 & 102 \\
+tenure track	& 2.300 &  3.700 &  4.350  & 4.155 &  4.600  & 4.900 & 0.56 & 108 \\
+tenured 	&   2.400   & 3.800 &  4.200  & 4.139  & 4.600 &  5.000  & 0.55 & 253
+\end{tabular}
+\includegraphics[width=0.6\textwidth]{figures/evals_rank}
+\end{center}
+
+%
+
+\begin{enumerate}
+
+\item What is the response and what is the explanatory variable in the ANOVA?
+
+\item State the hypotheses for evaluating whether the average evaluation score varies by rank.
+
+\item Check the conditions for evaluating these hypotheses.
+
+\item Below is a partial ANOVA table. Fill in the blanks. \textit{Hint:} Not all blanks in the table need to be filled, you need to decide which blanks need to be filled.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{lrrrrr}
+  \hline
+ 			& Df 		& Sum Sq & Mean Sq 	& F value & Pr($>$F) \\ 
+  \hline
+evals\$rank 	&  		& 1.59 	&  			& 	 	&  \\ 
+  Residuals 	& 	 	& 	 	& 	 		& 		&  \\ 
+   \hline
+Total			&		& 136.66
+\end{tabular}
+\end{center}
+
+\item Determine the conclusion of the hypothesis test at $\alpha = 0.10$.
+
+\item Explain what the sum of squares associated with rank (also called $SS_{group}$) and sum of squares associated with the residuals (also called $SS_{error}$) and the total sum of squares mean. You are not being asked to calculate these numbers, only to explain what they mean in context of the data.
+
+\end{enumerate}
+
+%
+
+\end{document}

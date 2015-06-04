@@ -1,0 +1,347 @@
+% -*- TeX-engine: xetex; eval: (auto-fill-mode 0); eval: (visual-line-mode 1); -*-
+% Compile with XeLaTeX
+
+%%%%%%%%%%%%%%%%%%%%%%%
+% Option 1: Slides: (comment for handouts)   %
+%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[slidestop,compress,mathserif,12pt,t,professionalfonts,xcolor=table]{beamer}
+
+% solution stuff
+\newcommand{\solnMult}[1]{
+\only<1>{#1}
+\only<2->{\red{\textbf{#1}}}
+}
+\newcommand{\soln}[1]{\textit{#1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Option 2: Handouts, without solutions (post before class)    %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \documentclass[11pt,containsverbatim,handout,xcolor=xelatex,dvipsnames,table]{beamer}
+
+% % handout layout
+% \usepackage{pgfpages}
+% \pgfpagesuselayout{4 on 1}[letterpaper,landscape,border shrink=5mm]
+
+% % solution stuff
+% \newcommand{\solnMult}[1]{#1}
+% \newcommand{\soln}[1]{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Option 3: Handouts, with solutions (may post after class if need be)    %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \documentclass[11pt,containsverbatim,handout,xcolor=xelatex,dvipsnames,table]{beamer}
+
+% % handout layout
+% \usepackage{pgfpages}
+% \pgfpagesuselayout{4 on 1}[letterpaper,landscape,border shrink=5mm]
+
+% % solution stuff
+% \newcommand{\solnMult}[1]{\red{\textbf{#1}}}
+% \newcommand{\soln}[1]{\textit{#1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Option 4: Notes Only
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% % See http://tex.stackexchange.com/questions/114219/add-notes-to-latex-beamer
+% \documentclass[10pt,containsverbatim,xcolor=xelatex,dvipsnames,table,notes=only]{beamer}
+
+% % handout layout
+% \usepackage{pgfpages}
+% \pgfpagesuselayout{2 on 1}[letterpaper, landscape, border shrink=5mm]
+
+% % solution stuff
+% \newcommand{\solnMult}[1]{#1}
+% \newcommand{\soln}[1]{}
+
+%%%%%%%%%%
+% Load style file, defaults  %
+%%%%%%%%%%
+
+\input{../../lec_style.tex}
+\input{../../definitions_default.tex}
+% ALT ALT
+% \input{../../definitions_custom.tex}
+
+%%%%%%%%%%%
+% Cover slide info    %
+%%%%%%%%%%%
+
+\title{Unit 4: Inference for numerical data}
+\subtitle{3. ANOVA}
+\author{Sta 104 - Summer 2015}
+\date{June 3, 2015}
+\institute{Duke University, Department of Statistical Science}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+% Begin document and set Helvetica Neue font   %
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\fontspec[Ligatures=TeX]{Helvetica Neue Light}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Title Page
+
+\begin{frame}[plain]
+
+\titlepage
+\vfill
+{\scriptsize \webLink{\PersonalSite}{Dr. \LastName{}} \hfill Slides posted at  \webLink{\CourseSite}{\CourseSite}}
+\addtocounter{framenumber}{-1} 
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Housekeeping}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Announcements}
+
+\begin{itemize}
+
+\item Project proposals due tonight
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{ANOVA Review}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+  \frametitle{}
+
+\vfill
+
+\begin{quote} 
+[These data are] from an experiment run by a British video-game manufacturer in an attempt to calibrate the level of difficulty of certain tasks in the video game. Subjects in this experiment were presented with a simple ``Where's Waldo?"-style visual scene. The subjects had to find a number (1 or 2) floating somewhere in the scene, to identify the number, and to press the corresponding button as quickly as possible. The response variable is their reaction time.
+\end{quote}
+
+\vfill
+
+\ct{From James G. Scott: \url{http://jgscott.github.io/teaching/r/rxntime/rxntime.html}}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+  \frametitle{ANOVA Review}
+  
+\begin{center}
+{\small
+\begin{tabular}{rrrrr}
+  \hline
+ & Subject & PictureTarget.RT & Littered & FarAway \\ 
+  \hline
+1 &  10 & 635 &   0 &   0 \\ 
+  2 &  10 & 1144 &   0 &   0 \\ 
+  3 &  10 & 570 &   0 &   0 \\ 
+  4 &  10 & 589 &   0 &   0 \\ 
+  5 &  10 & 754 &   0 &   0 \\ 
+  6 &  10 & 601 &   0 &   0 \\ 
+  ... \\
+   \hline
+\end{tabular}
+}
+\end{center}
+
+\small
+\begin{itemize}
+\item \texttt{PictureTarget.RT}: the subject's reaction time in milliseconds.
+\item \texttt{Subject}: a numerical identifier for the subject undergoing the test.
+\item \texttt{FarAway}: was the number to be identified far away (1) or near (0) in the visual scene?
+\item \texttt{Littered}: the British way of saying whether the scene was cluttered (1) or mostly free of clutter (0).
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+  \frametitle{ANOVA Review}
+
+  \disc{Do some subjects in the study have different mean reaction times?}
+
+  \begin{center}
+  \includegraphics[scale=0.65]{figures/rxntime-boxplots.png}
+  \end{center}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+  \frametitle{ANOVA Review}
+
+Number of observations $n = 1920$.
+
+\hfill \\
+
+{\footnotesize
+\begin{tabular}{lrrrrr}
+  \hline
+ & Df & Sum Sq & Mean Sq & F value & Pr($>$F) \\ 
+  \hline
+rxntime\$Subject & ?? & 4060822.10 & 369165.65 & 20.05 & 0.0000 \\ 
+  Residuals & ?? & 35129401.48 & 18411.64 &  &  \\ 
+   \hline
+\end{tabular}
+}
+
+% Response: PictureTarget.RT
+%                      Df   Sum Sq Mean Sq F value    Pr(>F)    
+% as.factor(Subject)   11  4060822  369166  20.051 < 2.2e-16 ***
+% Residuals          1908 35129401   18412 
+
+\clicker{What are the degrees of freedom?}
+\begin{enumerate}[(a)]
+\item  1 and 1909
+\item \solnMult{11 and 1908}
+\item 11 and 1909
+\item 12 and 1908
+\end{enumerate}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+  \frametitle{ANOVA Review}
+
+  (Assume $\alpha = 0.05$.)
+
+  \clicker{What is the most appropriate conclusion?}
+  \begin{enumerate}[(a)]
+  \item There is no evidence that the subjects have different mean reaction times.
+  \item There is no evidence that some of the subjects have the same mean reaction times.
+  \item \solnMult{Some pairs of subjects have different mean reaction times.}
+  \item All paris of subjects have different mean reaction times.
+  \end{enumerate}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Main ideas}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{To identify which means are different, use pairwise t-tests}
+\label{mi1}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Multiple testing}
+
+\clicker{Suppose we want to determine which subjects have a mean reaction time different than Subject 6. How many pairwise t-tests will we need to do? Remember: there were a total of 12.}
+
+\begin{enumerate}[(a)]
+\item 6
+\item \solnMult{11}
+\item 12
+\item $\frac{6 \times 5}{2} = 15$
+\end{enumerate}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Multiple testing}
+
+\clicker{Suppose we want to determine which means are different from each other. How many pairwise t-tests would we need to conduct? Remember: there were a total of 12 groups.}
+
+\begin{enumerate}[(a)]
+\item 12
+\item 12! = 479,001,600
+\item $12 \times 11 = 132$
+\item \solnMult{$\frac{12 \times 11}{2} = 66$}
+\end{enumerate}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{If you want to test many hypotheses simultaneously, use the Bonferroni correction}
+\label{mi2}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+  \frametitle{2. If you want to test many hypotheses simultaneously, use the Bonferroni correction}
+
+\vfill
+
+Bonferroni correction: 
+\begin{itemize}
+\item Target type I error rate: $\alpha$.
+
+\item Number of null/alt hypotheses to be tested using the same data set: $K$
+
+\item If you set the significance level for each test to be
+\[
+\alpha^* = \alpha / K,
+\]
+then the probability of making one or more type I errors is $ \leq \alpha$.
+
+\end{itemize}
+
+\vfill
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+  \frametitle{}
+
+\vfill
+
+\app{4.6 ANOVA - Pt 2}{See the course webpage for details.}
+
+\vfill
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Summary}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Summary of main ideas}
+
+\vfill
+
+\begin{enumerate}
+
+\item \nameref{mi1}
+
+\item \nameref{mi2}
+
+\end{enumerate}
+
+\vfill
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}

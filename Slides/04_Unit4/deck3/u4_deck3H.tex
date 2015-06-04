@@ -1,0 +1,408 @@
+% -*- TeX-engine: xetex; eval: (auto-fill-mode 0); eval: (visual-line-mode 1); -*-
+% Compile with XeLaTeX
+
+%%%%%%%%%%%%%%%%%%%%%%%
+% Option 1: Slides: (comment for handouts)   %
+%%%%%%%%%%%%%%%%%%%%%%%
+
+%\documentclass[slidestop,compress,mathserif,12pt,t,professionalfonts,xcolor=table]{beamer}
+%
+%% solution stuff
+%\newcommand{\solnMult}[1]{
+%\only<1>{#1}
+%\only<2->{\red{\textbf{#1}}}
+%}
+%\newcommand{\soln}[1]{\textit{#1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Option 2: Handouts, without solutions (post before class)    %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+ \documentclass[11pt,containsverbatim,handout,xcolor=xelatex,dvipsnames,table]{beamer}
+
+ % handout layout
+ \usepackage{pgfpages}
+ \pgfpagesuselayout{4 on 1}[letterpaper,landscape,border shrink=5mm]
+
+ % solution stuff
+ \newcommand{\solnMult}[1]{#1}
+ \newcommand{\soln}[1]{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Option 3: Handouts, with solutions (may post after class if need be)    %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \documentclass[11pt,containsverbatim,handout,xcolor=xelatex,dvipsnames,table]{beamer}
+
+% % handout layout
+% \usepackage{pgfpages}
+% \pgfpagesuselayout{4 on 1}[letterpaper,landscape,border shrink=5mm]
+
+% % solution stuff
+% \newcommand{\solnMult}[1]{\red{\textbf{#1}}}
+% \newcommand{\soln}[1]{\textit{#1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Option 4: Notes Only
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% % See http://tex.stackexchange.com/questions/114219/add-notes-to-latex-beamer
+% \documentclass[10pt,containsverbatim,xcolor=xelatex,dvipsnames,table,notes=only]{beamer}
+
+% % handout layout
+% \usepackage{pgfpages}
+% \pgfpagesuselayout{2 on 1}[letterpaper, landscape, border shrink=5mm]
+
+% % solution stuff
+% \newcommand{\solnMult}[1]{#1}
+% \newcommand{\soln}[1]{}
+
+%%%%%%%%%%
+% Load style file, defaults  %
+%%%%%%%%%%
+
+\input{../../lec_style.tex}
+\input{../../definitions_default.tex}
+% ALT ALT
+% \input{../../definitions_custom.tex}
+
+%%%%%%%%%%%
+% Cover slide info    %
+%%%%%%%%%%%
+
+\title{Unit 4: Inference for numerical data}
+\subtitle{3. ANOVA}
+\author{Sta 104 - Summer 2015}
+\date{June 3, 2015}
+\institute{Duke University, Department of Statistical Science}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+% Begin document and set Helvetica Neue font   %
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\fontspec[Ligatures=TeX]{Helvetica Neue Light}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Title Page
+
+\begin{frame}[plain]
+
+\titlepage
+\vfill
+{\scriptsize \webLink{\PersonalSite}{Dr. \LastName{}} \hfill Slides posted at  \webLink{\CourseSite}{\CourseSite}}
+\addtocounter{framenumber}{-1} 
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Housekeeping}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Announcements}
+
+\begin{itemize}
+
+\item 
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Main ideas}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{It is difficult to simultaneously compare many groups}
+\label{mi1}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{1. It is difficult to simultaneously compare many groups}
+
+\twocol{0.35}{0.65}
+{
+\begin{center}
+\includegraphics[width=\textwidth]{figures/jelly_beans}
+\end{center}
+}
+{
+\pause
+\disc{How would you check this rumor? Imagine that doctors can assign an ``acne score" to 
+patients on a 0 - 100 scale.
+\begin{itemize}
+\item What is the research question?
+\item How would you conduct your study?
+\item What statistical test would you use?
+\end{itemize}
+}
+}
+
+\hfill \\
+
+\pause
+
+\soln{
+Use an independent samples t-test:
+\[ H_0: \mu_{\textmd{green jelly beans}} = \mu_{\textmd{placebo}} \]
+\[ H_A: \mu_{\textmd{green jelly beans}} \neq \mu_{\textmd{placebo}} \]
+}
+
+\end{frame}
+	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{}
+
+\vfill
+  
+\begin{center}
+\url{http://imgs.xkcd.com/comics/significant.png}
+\end{center}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{1. It is difficult to simultaneously compare many groups}
+
+\textbf{Suppose} $\alpha = 0.05$.
+
+\disc{What is the probability of rejecting the following null hypothesis 
+when in fact it is true?
+\[ H_0: \mu_{\textmd{purple}} = \mu_{\textmd{placebo}} \]
+}
+
+$\:$ \\
+
+\pause
+
+\soln{P(Type 1 Error) = 0.05}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{1. It is difficult to simultaneously compare many groups}
+
+\textbf{Suppose} $\alpha = 0.05$.
+
+\clicker{If all the tests are independent and if no color of Jelly bean has any link to acne, what is the
+probability of making at least one type I error in the 20 trials?}
+\begin{enumerate}[(a)]
+\item 5\%
+\item 36\%
+\item \solnMult{64\%} \only<2>{\soln{\red{$\rightarrow$ $1 - 0.95^{20} \approx 0.64$}}}
+\item 95\%
+\end{enumerate}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{ANOVA is useful for testing if there is \emph{some} difference
+between the means of many different groups}
+\label{mi2}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{2. ANOVA is useful for testing if there is \emph{some} difference
+between the means of many different groups.}
+
+Null hypothesis for $F$-test (the test associated with ANOVA):
+\[ H_0: \mu_{\textmd{placebo}} = \mu_{\textmd{purple}} = \mu_{\textmd{brown}} =
+\ldots = \mu_{\textmd{peach}} = \mu_{\textmd{orange}} \]
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{}
+
+\clicker{Which of the following is a correct version of the alternative
+hypothesis?}
+
+\begin{enumerate}[(a)]
+\item For any two groups, including the placebo group, no two group means are the same.
+\item For any two groups, not including the placebo group, no two group means are the
+same.
+\item Amongst the jelly bean groups, there are at least two groups that have different group means.
+\item \solnMult{Amongst all groups, there are at least two groups that have different group means.}
+\end{enumerate}
+
+\pause
+
+The practical implication of this alternative is: ``At least one color of
+jelly bean is linked to acne.''
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{The test compares between group variation to within group variation}
+\label{mi3}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{3. The test compares between group variation to within group variation}
+
+\[ \sum {\color{blue} \mid}^2 \Big/ \sum {\color{green} \mid}^2 \]
+
+\begin{center}
+\includegraphics[scale=0.6]{figures/anova-middle-ground-jelly-bean}
+\end{center}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Relatively large WITHIN group variation: little apparent difference}
+
+\[ \sum {\color{blue} \mid}^2 \Big/ \sum {\color{green} \mid}^2 \]
+
+\begin{center}
+\includegraphics[scale=0.6]{figures/anova-lots-of-within-group-jelly-bean}
+\end{center}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Relatively large BETWEEN group variation: there may be a difference}
+
+\[ \sum {\color{blue} \mid}^2 \Big/ \sum {\color{green} \mid}^2 \]
+
+\begin{center}
+\includegraphics[scale=0.6]{figures/anova-lots-of-between-group-jelly-bean}
+\end{center}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{3. The F-test is based on comparing between group to within group variation}
+
+For historical reasons, we use a modification of this ratio called the $F$-statistic
+\[ F = \frac{\sum {\color{blue} \mid}^2 ~ / ~ (k - 1)}{\sum {\color{green} \mid}^2 ~ / ~ (n - k)} ~ =  ~ \frac{MSG}{MSE} \]
+where $k$ is the \# of groups and $n$ is the \# of observations
+
+\pause
+
+{\small
+\begin{center}
+\begin{tabular}{lllrrr}
+\hline
+		& Df  	& Sum Sq 								& Mean Sq	& F value 		& Pr($>$F) \\ 
+\hline
+Between 	& k - 1 	& $\sum {\color{blue}\mid}^2$  					& MSG 		& $F_{obs}$ 	& $p-value$ \\ 
+Within  	& n - k 	& $\sum {\color{green}\mid}^2$ 				& MSE 		&		 	&  \\ 
+\hline
+Total		& n - 1 	& $\sum ({\color{blue}\mid} + {\color{green}\mid})^2$	&                	&                	&
+\end{tabular}
+\end{center}
+}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{}
+
+\clicker{The p-value for the $F$-test is 0.045, and $\alpha = 0.05$. 
+What is the most accurate statement of the results?}
+
+\begin{enumerate}[(a)]
+\item At least one color of jelly bean is linked to acne.
+\item At least one color of jelly bean is not linked to acne.
+\item \solnMult{There is little evidence that any color of jelly bean is linked to acne.}
+\item Jelly beans definitely do not cause acne.
+\end{enumerate}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{}
+
+\clicker{For the $F$-test with $\alpha = 0.05$, what is the probability 
+of incorrectly rejecting the null?}
+
+\begin{enumerate}[(a)]
+\item \solnMult{5\%}
+\item 36\%
+\item 64\%
+\item 95\%
+\end{enumerate}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+
+\vfill
+
+\app{4.5 ANOVA - Pt 1}{See the course webpage for details.}
+
+\vfill
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Summary}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Summary of main ideas}
+
+\vfill
+
+\begin{enumerate}
+
+\item \nameref{mi1}
+
+\item \nameref{mi2}
+
+\item \nameref{mi3}
+
+\end{enumerate}
+
+\vfill
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,84 @@
+% -*- TeX-engine: xetex; eval: (auto-fill-mode 0); eval: (visual-line-mode 1); -*-
+% Compile with XeLaTeX
+
+\documentclass[11pt]{article}
+\input{../app_style.tex}
+
+%%%%%%%%%%%
+% App Ex number    %
+%%%%%%%%%%%
+
+% DON'T FORGET TO UPDATE
+
+\newcommand{\appno}[1]
+{5.1}
+
+%%%%%%%%%%%%%%
+% Turn on/off solutions       %
+%%%%%%%%%%%%%%
+
+% Off
+\newcommand{\soln}[1]{
+\vskip5pt
+}
+
+%% On
+%\newcommand{\soln}[1]{
+%\textit{\textcolor{custom_darkGray}{#1}}
+%}
+
+%%%%%%%%%%%%%%%%
+% Document
+%%%%%%%%%%%%%%%%
+
+\begin{document}
+\fontspec[Ligatures=TeX]{Helvetica Neue Light}
+
+Dr. \c{C}etinkaya-Rundel \hfill Data Analysis and Statistical Inference \\
+
+\ttl{Application exercise \appno{}: \\
+Inference for a single proportion}
+
+\inst{Submit your responses on \Sakai{}, under the appropriate assignment. Only one submission per team is required. One team will be randomly selected and their responses will be discussed.}
+
+
+\section*{How many digits of $\pi$ do Americans have memorized?}
+
+A Survey Monkey Audience poll asked 941 respondents to type the digits of $\pi$ from memory. The distribution of results is as follows:
+
+\begin{center}
+\begin{tabular}{l | r}
+LEVEL OF  &	PERCENTAGE  \\
+PRECISION & OF RESPONDENTS \\
+\hline
+3.1		& 73 \\
+3.14		& 64 \\
+\textbf{3.141}	& \textbf{33} \\
+3.1415	& 26 \\
+3.14159	& 19 \\
+3.141592	& 12 \\
+3.1415926    &	10 \\
+3.14159265  &	7 \\
+3.141592653 & 	5 \\
+\end{tabular}
+\end{center}
+
+Survey Monkey says that their Audience surveys are benchmarked to ensure the polling pool is representative of the U.S. population.
+
+Source: {\footnotesize \url{http://fivethirtyeight.com/datalab/how-many-digits-of-pi-you-have-to-have-memorized-to-be-special/}}
+
+%
+
+Don't forget to check the conditions when completing the following tasks.
+
+\begin{enumerate}
+
+\item You are asked to write a newspaper article about the percentage of people who have memorized digits of $\pi$ beyond the second decimal (third decimal or more). You, obviously, shouldn't just report the point estimate from the survey, but instead also provide a margin of error around it. Report the findings in one sentence at the 95\% confidence level.
+
+\item Evaluate whether these data provide convincing evidence that less than 50\% of people have memorized digits of $\pi$ beyond the second decimal.
+
+\end{enumerate}
+
+%
+
+\end{document}

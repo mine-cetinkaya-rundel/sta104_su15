@@ -77,7 +77,8 @@ In the `destfile` argument, insert your name. For example, I would use `destfile
 ## Content
 
 Answer the following briefly but thoroughly.
-s
+
+
 - Research question - You should phrase your research question in a way that matches up with the scope of inference your dataset allows for.
 - Cases - What are the cases, and how many are there?
 - Data collection - Describe the method of data collection.

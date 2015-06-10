@@ -1,0 +1,76 @@
+
+Lab 09 walk through
+
+## Intro
+
+* This week in class we are talking about hypothesis tests and confidence
+  intervals concerning a single proporiton or the difference between two
+  proportions.
+
+* Today we are going to look at a data set concerning atheism to explore these
+  concepts.
+
+* The Washington Post and Huffington Post recently reported on the rise of
+  atheism in America.
+
+* Those stories were based on a survey done by Gallup-International (not
+  affiliated with Gallup in the US) that looked at attitudes towards
+  religiousity and atheism across the world.
+
+	Specifically the survey asked: 
+
+    "Irrespective of whether you attend a place of worship or not, would you say
+    you are a religious person, not a religious person or a convinced atheist?"
+
+* Point out document link and bring it up --- You will need to familiarize
+  yourself with this document for the lab.
+
+* In any statistical analysis (including your project) you want to make sure to
+  pay attention to a few key details like
+
+	+ What is the population?
+	+ What are the cases you actually observe?
+	+ How was the data collected?
+
+  Let's look at the document: literally, just read the first 5 paragraphs
+  starting with "Zurich, 27 July 2012".
+
+  Can we say anything about the population, cases, or how the data was collected
+  from these first few paragraphs?
+
+* Now that we know a little bit about the population and how the data was
+  collected, let's check out the actual data set.  (Download data)
+
+	+ Dataset is called atheism.
+	+ The cases are people.
+	+ The variables are nationality, response (atheist or not), year of survey.
+    + We can only see the first 1000 cases in RStudio---if we could see more we
+      would see lots of other nationalities and that some cases responded
+      "atheist".
+
+* There are a couple differnt types of questions we can answer using this
+  dataset, for instance we could ask:
+
+	+ "What proportion of people in country X are atheist?" or
+	+ "Has the proportion of atheists in country X changed over time?"
+
+  These are the types of questions you will be answering today in your lab.
+
+* Get to work, I will interrupt lab a couple times to clarify some sticky spots.
+
+## Sticky parts
+
+* Maximum margin of error
+
+* Excercise 10
+
+    + Creating multiple plots using par(mfrow=c(2,2))
+    + Noting that the skew is different for each plot.
+
+* On your own part 1: overlapping intervals
+
+* On your own part 2: multiple hyp. tests, binomial connection.
+
+* On your own part 3: call back to maximum margin of error
+
+

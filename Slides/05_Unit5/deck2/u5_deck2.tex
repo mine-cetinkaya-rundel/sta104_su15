@@ -1,0 +1,466 @@
+% -*- TeX-engine: xetex; eval: (auto-fill-mode 0); eval: (visual-line-mode 1); -*-
+% Compile with XeLaTeX
+
+%%%%%%%%%%%%%%%%%%%%%%%
+% Option 1: Slides: (comment for handouts)   %
+%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[slidestop,compress,mathserif,12pt,t,professionalfonts,xcolor=table]{beamer}
+
+% solution stuff
+\newcommand{\solnMult}[1]{
+\only<1>{#1}
+\only<2->{\red{\textbf{#1}}}
+}
+\newcommand{\soln}[1]{\textit{#1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Option 2: Handouts, without solutions (post before class)    %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \documentclass[11pt,containsverbatim,handout,xcolor=xelatex,dvipsnames,table]{beamer}
+
+% % handout layout
+% \usepackage{pgfpages}
+% \pgfpagesuselayout{4 on 1}[letterpaper,landscape,border shrink=5mm]
+
+% % solution stuff
+% \newcommand{\solnMult}[1]{#1}
+% \newcommand{\soln}[1]{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Option 3: Handouts, with solutions (may post after class if need be)    %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \documentclass[11pt,containsverbatim,handout,xcolor=xelatex,dvipsnames,table]{beamer}
+
+% % handout layout
+% \usepackage{pgfpages}
+% \pgfpagesuselayout{4 on 1}[letterpaper,landscape,border shrink=5mm]
+
+% % solution stuff
+% \newcommand{\solnMult}[1]{\red{\textbf{#1}}}
+% \newcommand{\soln}[1]{\textit{#1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Option 4: Notes Only
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% % See http://tex.stackexchange.com/questions/114219/add-notes-to-latex-beamer
+% \documentclass[10pt,containsverbatim,xcolor=xelatex,dvipsnames,table,notes=only]{beamer}
+
+% % handout layout
+% \usepackage{pgfpages}
+% \pgfpagesuselayout{2 on 1}[letterpaper, landscape, border shrink=5mm]
+
+% % solution stuff
+% \newcommand{\solnMult}[1]{#1}
+% \newcommand{\soln}[1]{}
+
+%%%%%%%%%%
+% Load style file, defaults  %
+%%%%%%%%%%
+
+\input{../../lec_style.tex}
+\input{../../definitions_default.tex}
+% ALT ALT
+% \input{../../definitions_custom.tex}
+
+%%%%%%%%%%%
+% Cover slide info    %
+%%%%%%%%%%%
+
+\title{Unit 5: Inference for categorical data}
+\subtitle{2. Comparing two proportions}
+\author{Sta 104 - Summer 2015}
+\date{June 9, 2015}
+\institute{Duke University, Department of Statistical Science}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+% Begin document and set Helvetica Neue font   %
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\fontspec[Ligatures=TeX]{Helvetica Neue Light}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Title Page
+
+\begin{frame}[plain]
+
+\titlepage
+\vfill
+{\scriptsize \webLink{\PersonalSite}{Dr. \LastName{}} \hfill Slides posted at  \webLink{\CourseSite}{\CourseSite}}
+\addtocounter{framenumber}{-1} 
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Housekeeping}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Announcements}
+
+\begin{itemize}
+
+\item Peer eval 2 opens today and closes Wednesday at midnight (note: different platform)
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Main ideas}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{CLT also describes the distribution of $\hat{p}_1 - \hat{p}_2$}
+\label{mi1}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{CLT also describes the distribution of $\hat{p}_1 - \hat{p}_2$}
+
+\[ (\hat{p}_1 - \hat{p}_2) \sim N \pr{ mean = (p_1 - p_2), SE = \sqrt{ \frac{p_1(1-p_1)}{n_1} + \frac{p_2(1-p_2)}{n_2} } } \]
+
+Conditions:
+\begin{itemize}
+\item Independence: Random sample/assignment + 10\% rule
+\item Sample size / skew: At least 10 successes and failures
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{For HT where $H_0: p_1 = p_2$, pool!}
+\label{mi2}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{For HT where $H_0: p_1 = p_2$, pool!}
+
+As with working with a single proportion,
+
+\begin{itemize}
+
+\item When doing a HT where $H_0: p_1 = p_2$ (almost always for HT), use expected counts / proportions for S-F condition and calculation of the standard error.
+
+\item Otherwise use observed counts / proportions for S-F condition and calculation of the standard error.
+
+\end{itemize}
+
+\pause 
+
+Expected proportion of success for both groups when $H_0: p_1 = p_2$ is defined as the \hl{pooled proportion}:
+\[ \hat{p}_{pool} = \frac{total~successes}{total~sample~size} = \frac{suc_1 + suc_2}{n_1 + n_2} \]
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{}
+
+\clicker{Suppose in group 1 30 out of 50 observations are successes, and in group 2 20 out of 60 observations are successes. What is the pooled proportion?}
+
+\begin{enumerate}[(a)]
+\item $\frac{30}{50}$
+\item $\frac{20}{60}$
+\item $\frac{30}{50} + \frac{20}{60}$
+\item \solnMult{$\frac{30 + 20}{50 + 60}$}
+\item $\frac{\frac{30}{50} + \frac{20}{60}}{2}$
+\end{enumerate}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{When S-F fails, simulate!}
+\label{mi3}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{When S-F fails, simulate!}
+
+\begin{itemize}
+
+\item If the S-F condition is met, can do theoretical inference: Z test, Z interval
+
+\item If the S-F condition is not met, must use simulation based methods: randomization test, bootstrap interval
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Applications}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Two population proportions, small sample}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{}
+
+\disc{{\small ``Healthy adults immunized with an experimental malaria vaccine, called PfSPZ may be completely protected from infection, according to government researchers." reported Time magazine in Aug 2013. The vaccine contains weakened forms of the live parasite -- \textit{Plasmodium falciparum} -- responsible for causing malaria. In a randomized trial, none of the six patients who received the vaccine developed malaria, while five of the six who were not vaccinated became infected. Do these data provide convincing evidence of a difference in rate of malaria infection?}}
+
+\pause
+
+\begin{center}
+\begin{tabular}{ll  cc c} 
+			&				& \multicolumn{2}{c}{\textit{Outcome}} \\
+\cline{3-5}
+							&			& Malaria 	&  No malaria 	& 	\\
+\cline{2-5}
+							&Vaccine 		& 0	 	& 6		& 6 	\\
+\raisebox{1.5ex}[0pt]{\textit{Group}}	&No vaccine	& 5	 	& 1 	 	& 6 \\
+\cline{2-5}
+							&Total		& 5		& 7		& 12
+\end{tabular}
+\end{center}
+
+\vfill
+
+\ct{http://healthland.time.com/2013/08/09/malaria-vaccine-shows-strongest-protection-yet-against-parasite/}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{}
+
+{\small
+\begin{center}
+\begin{tabular}{ll  cc c} 
+			&				& \multicolumn{2}{c}{\textit{Outcome}} \\
+\cline{3-5}
+							&			& Malaria 	&  No malaria 	& 	\\
+\cline{2-5}
+							&Vaccine 		& 0	 	& 6		& 6 	\\
+\raisebox{1.5ex}[0pt]{\textit{Group}}	&No vaccine	& 5	 	& 1 	 	& 6 \\
+\cline{2-5}
+							&Total		& 5		& 7		& 12
+\end{tabular}
+\end{center}
+}
+
+\pause
+
+\[ H_0: p_{T} = p_{C} \qquad H_A: p_{T} \ne p_{C} \]
+
+\pause
+
+Conditions:
+\begin{enumerate}
+\item Independence: Patients are randomly assigned to treatment groups
+\item Success-failure: ?
+\end{enumerate}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+
+\clicker{Assuming that the null hypothesis ($H_0: p_{T} = p_{C}$) is true, which of the following is the pooled proportion of patients with malaria in the two groups?}
+
+\twocol{0.35}{0.7}{
+\begin{enumerate}[(a)]
+\item $\frac{6}{12} = 0.5$
+\item \solnMult{$\frac{5}{12} = 0.417$}
+\item $\frac{0}{5} = 0$
+\item $\frac{6}{7} = 0.857$
+\item $\frac{7}{12} = 0.583$
+\end{enumerate}
+}
+{
+{\footnotesize
+\begin{center}
+\begin{tabular}{ll  cc c} 
+			&				& \multicolumn{2}{c}{\textit{Outcome}} \\
+\cline{3-4}
+							&			& Malaria 	&  No malaria 	& 	\\
+\cline{2-5}
+							&Vaccine 		& 0	 	& 6		& 6 	\\
+\raisebox{1.5ex}[0pt]{\textit{Group}}	&No vaccine	& 5	 	& 1 	 	& 6 \\
+\cline{2-5}
+							&Total		& 5		& 7		& 12
+\end{tabular}
+\end{center}
+}
+
+}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+
+\clicker{Assuming that the null hypothesis ($H_0: p_{T} = p_{C}$) is true, how many patients would we expect to get infected with malaria in the vaccine group?}
+
+\twocol{0.35}{0.7}{
+\begin{enumerate}[(a)]
+\item $0.417 \times 12 = 5$
+\item \solnMult{$0.417 \times 6 = 2.5$}
+\item $0.417 \times 5 = 2.085$ 
+\item $0.5 \times 6 = 3$
+\item $0.583 \times 12 = 7$
+\end{enumerate}
+}
+{
+{\footnotesize
+\begin{center}
+\begin{tabular}{ll  cc c} 
+			&				& \multicolumn{2}{c}{\textit{Outcome}} \\
+\cline{3-4}
+							&			& Malaria 	&  No malaria 	& 	\\
+\cline{2-5}
+							&Vaccine 		& 0	 	& 6		& 6 	\\
+\raisebox{1.5ex}[0pt]{\textit{Group}}	&No vaccine	& 5	 	& 1 	 	& 6 \\
+\cline{2-5}
+							&Total		& 5		& 7		& 12
+\end{tabular}
+\end{center}
+}
+
+}
+
+\only<3|handout:0>{\red{
+\[ \hat{p}_{pool} = 5 / 12 = 0.417 \]
+\[ 1 - 0.417 = 0.583 \]
+\begin{align*}
+Exp~S_{T} = 0.417 \times 6 = 2.5~~&~~Exp~S_{C} = 0.417 \times 6 = 2.5 \\
+Exp~F_{T} = 0.583 \times 6 = 3.5~~&~~Exp~F_{C} = 0.583 \times 6 = 3.5 \\
+\end{align*}
+}}
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Simulation scheme}
+
+\begin{enumerate}
+
+\item Use 12 index cards, where each card represents an experimental unit.
+
+\pause
+
+\item Mark 5 of the cards as ``malaria" and the remaining 7 as ``no malaria".
+
+\pause
+
+\item Shuffle the cards and split into two groups of size 6, for vaccine and no vaccine.
+
+\pause
+
+\item Calculate the difference between the proportions of ``malaria" in the vaccine and no vaccine decks, and record this number.
+
+\pause
+
+\item Repeat steps (3) and (4) many times to build a randomization distribution of differences in simulated proportions.
+
+\end{enumerate}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+\frametitle{Simulate in R}
+
+\vspace{-0.25cm}
+
+{\tiny
+\begin{Verbatim}[frame=single, formatcom=\color{blue}]
+download("https://stat.duke.edu/~mc301/data/vacc_malaria.csv", destfile = "vacc_malaria.csv")
+vacc_malaria = read.csv("vacc_malaria.csv")
+
+inference(vacc_malaria$outcome, vacc_malaria$group, success = "malaria", est = "proportion", 
+    type = "ht", null = 0, alternative = "twosided", method = "simulation", seed = 1028)
+\end{Verbatim}
+}
+
+\pause
+
+{\tiny
+\begin{Verbatim}[frame=single, formatcom=\color{gray}]
+Response variable: categorical, Explanatory variable: categorical
+Difference between two proportions -- success: malaria
+Summary statistics:
+            x
+y            no vaccine vaccine Sum
+  malaria             5       0   5
+  no malaria          1       6   7
+  Sum                 6       6  12
+Observed difference between proportions (no vaccine-vaccine) = 0.8333
+H0: p_no vaccine - p_vaccine = 0 
+HA: p_no vaccine - p_vaccine != 0 
+p-value =  0.0152 
+\end{Verbatim}
+}
+
+\includegraphics[width=0.75\textwidth]{figures/malaria/malaria}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Comparing two proportions, large sample}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+
+\vfill
+
+\app{App Ex 5.2}{See course website for details.}
+
+\vfill
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Summary}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Summary of main ideas}
+
+\vfill
+
+\begin{enumerate}
+
+\item \nameref{mi1}
+
+\item \nameref{mi2}
+
+\item \nameref{mi3}
+
+\end{enumerate}
+
+\vfill
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}

@@ -1,0 +1,136 @@
+% -*- TeX-engine: xetex; eval: (auto-fill-mode 0); eval: (visual-line-mode 1); -*-
+% Compile with XeLaTeX
+
+\documentclass[11pt]{article}
+\input{../app_style.tex}
+
+%%%%%%%%%%%
+% App Ex number    %
+%%%%%%%%%%%
+
+% DON'T FORGET TO UPDATE
+
+\newcommand{\appno}[1]
+{5.3}
+
+%%%%%%%%%%%%%%
+% Turn on/off solutions       %
+%%%%%%%%%%%%%%
+
+% Off
+\newcommand{\soln}[1]{}
+
+%% On
+%\newcommand{\soln}[1]{
+%\textit{\textcolor{custom_darkGray}{#1}}
+%}
+
+%%%%%%%%%%%%%%%%
+% Document
+%%%%%%%%%%%%%%%%
+
+\begin{document}
+\fontspec[Ligatures=TeX]{Helvetica Neue Light}
+
+Dr. \c{C}etinkaya-Rundel \hfill Data Analysis and Statistical Inference \\
+
+\ttl{Application exercise \appno{}: \\
+Chi-square testing}
+
+\inst{Submit your responses on \Sakai{}, under the appropriate assignment. Only one submission per team is required. One team will be randomly selected and their responses will be discussed.}
+
+\section*{American National Election Survey}
+
+The American National Election Studies (ANES) aims to inform explanations of election outcomes by providing data that support rich hypothesis testing, maximize methodological excellence, measure many variables, and promote comparisons across people, contexts, and time. In this question we will focus on two variables from the 2012 ANES dataset: 
+\begin{itemize}
+\item region (levels: Northeast, North Central, South, and West), and
+\item whether the respondent feels things in this country are generally going in the right direction or things have pretty seriously gotten off on the wrong track.
+\end{itemize}
+To keep calculations simple we will work with a random sample of 500 respondents from the ANES dataset. The distribution of responses are as follows:
+
+\begin{minipage}[c]{0.5\textwidth}
+\begin{center}
+\begin{tabular}{rrr|r}
+  \hline
+ & Right  & Wrong  &  \\ 
+ &  Direction &  Track & Total \\ 
+  \hline
+Northeast & 29 & 54 & 83 \\ 
+  North Central & 44 & 77 & 121 \\ 
+  South & \textit{\textbf{62}} & 131 & 193 \\ 
+  West & 36 & 67 & 103 \\ 
+\hline
+  Total & 171 & 329 & 500 \\ 
+   \hline
+\end{tabular}
+\end{center}
+\end{minipage}
+\begin{minipage}[c]{0.5\textwidth}
+\begin{center}
+\includegraphics[width=0.95\textwidth]{anes_mosaic}
+\end{center}
+\end{minipage}
+
+\begin{center}
+\textbf{HINT: Read both parts before answering the question.}
+\end{center}
+
+\begin{enumerate}
+
+\item \textbf{Part 1:} Region
+
+According to the 2010 Census, 18\% of US residents live in the Northeast, 22\% live in the North Central region, 37\% live in the South, and 23\% live in the North. Evaluate whether the ANES sample is representative of the population distribution of US residents. Make sure to clearly state the hypotheses, check conditions, calculate the appropriate test statistic and the p-value, and make your conclusion in context of the data. \emph{Also} comment on what your conclusion says about whether or not this sample can be considered to be representative.
+
+\soln{$H_0$: The sample distribution of regions follows the census distribution. \\
+$H_A$: The sample distribution of regions does not follow the census distribution.
+\begin{itemize}
+\item Independence:
+\begin{itemize}
+\item 500 $<$ 10\% of US population
+\item Sample is random
+\item Each person in the sample is only in one cell
+\end{itemize}
+\item Sample size: \\
+$E_{NE}  500 \times 0.18 = 90$ $\qquad$ $E_{NC}  500 \times 0.22 = 110$ \\
+$E_{S}  500 \times 0.37 = 185$ $\qquad$ $E_{W}  500 \times 0.23 = 115$ \\
+All expected counts are greater than 5.
+\end{itemize}
+$\chi^2 = \frac{(83 - 90)^2}{90} + \frac{(121 - 110)^2}{110} + \frac{(193 - 185)^2}{185} + \frac{(103 - 115)^2}{115} \approx 3.24$ \\
+$df = 4 - 1 = 3$ \\
+$p-value > 0.3$ \\
+p-value is large so we fail to reject $H_0$, \\
+the data do not provide convincing evidence that the sample distribution of regions does not follow the census distribution. \\
+The sample is likely representative since the distribution of sampled individual matches the distribution regional population distribution.
+}
+
+\item \textbf{Part 2:} Region and direction
+\begin{enumerate}
+
+\item In evaluating the relationship between region and feeling about the direction things are going in the country, what is the response variable and what is the explanatory variable?
+
+\soln{response - direction, explanatory - region}
+
+\item What are the hypotheses for evaluating this relationship?
+
+\soln{$H_0:$ Region and opinion on direction are independent. \\
+$H_A:$ Region and opinion on direction are dependent. \\
+}
+
+\item If in fact the null hypothesis is true, how many Southerners would we expect to respond that they feel things in this country are generally going in the right direction?
+
+\soln{$E = \frac{193 \times 171}{500} = 66.006$}
+
+\item What is the contribution of this cell (South \& Right direction) to the test statistic?
+
+\soln{$\frac{(62 - 66.006)^2}{66.006} = 0.24313$}
+
+\item Speculate on whether you would expect to reject or not reject the null hypothesis based on the mosaic plot shown above. Explain your reasoning in at most two sentences.
+
+\soln{No, \\
+P(right direction $|$ each level of the region variable) is roughly equal, chances are we won't reject $H_0$.}
+
+\end{enumerate}
+
+\end{enumerate}
+
+\end{document}

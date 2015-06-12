@@ -1,0 +1,77 @@
+% -*- TeX-engine: xetex; eval: (auto-fill-mode 0); eval: (visual-line-mode 1); -*-
+% Compile with XeLaTeX
+
+\documentclass[11pt]{article}
+\input{../app_style.tex}
+
+%%%%%%%%%%%
+% App Ex number    %
+%%%%%%%%%%%
+
+% DON'T FORGET TO UPDATE
+
+\newcommand{\appno}[1]
+{6.1}
+
+%%%%%%%%%%%%%%
+% Turn on/off solutions       %
+%%%%%%%%%%%%%%
+
+% Off
+\newcommand{\soln}[1]{
+\vskip5pt
+}
+
+%% On
+%\newcommand{\soln}[1]{
+%\textit{\textcolor{custom_darkGray}{#1}}
+%}
+
+%%%%%%%%%%%%%%%%
+% Document
+%%%%%%%%%%%%%%%%
+
+\begin{document}
+\fontspec[Ligatures=TeX]{Helvetica Neue Light}
+
+Dr. \c{C}etinkaya-Rundel \hfill Data Analysis and Statistical Inference \\
+
+\ttl{Application exercise \appno{}: \\
+Linear model}
+
+\inst{Submit your responses on \Sakai{}, under the appropriate assignment. Only one submission per team is required. One team will be randomly selected and their responses will be discussed.}
+
+\section*{Murders and poverty}
+
+We want to build a model for for predicting annual murders per million from percentage living in poverty in a random sample of 20 metropolitan areas. The scatterplot below shows the relationship between these variables, and the summary table contains all values you will need to construct the linear model.
+
+\begin{multicols}{2}
+\begin{center}
+\includegraphics[width=0.4\textwidth]{murder/annual_murders_per_mil_perc_pov}
+\end{center}
+%
+\begin{tabular}{l r r}
+\hline
+		& annual murders		& \% in poverty \\
+		& / million $(y)$		& $(x)$   \\
+\hline
+mean	& $\bar{y} = 20.57$	& $\bar{x} = 19.72$  \\
+sd		& $s_y = 9.88$		& $s_x = 3.24$ \\
+\hline
+		& correlation		& $R = 0.84$ \\
+\hline
+\end{tabular}
+\end{multicols}
+%
+
+\begin{enumerate}
+
+\item Calculate the slope.
+
+\item Calculate the intercept.
+
+\item Write out the linear model.
+
+\end{enumerate}
+
+\end{document}

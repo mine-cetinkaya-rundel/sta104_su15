@@ -1,0 +1,400 @@
+% -*- TeX-engine: xetex; eval: (auto-fill-mode 0); eval: (visual-line-mode 1); -*-
+% Compile with XeLaTeX
+
+%%%%%%%%%%%%%%%%%%%%%%%
+% Option 1: Slides: (comment for handouts)   %
+%%%%%%%%%%%%%%%%%%%%%%%
+
+%\documentclass[slidestop,compress,mathserif,12pt,t,professionalfonts,xcolor=table]{beamer}
+%
+%% solution stuff
+%\newcommand{\solnMult}[1]{
+%\only<1>{#1}
+%\only<2->{\red{\textbf{#1}}}
+%}
+%\newcommand{\soln}[1]{\textit{#1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Option 2: Handouts, without solutions (post before class)    %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+ \documentclass[11pt,containsverbatim,handout,xcolor=xelatex,dvipsnames,table]{beamer}
+
+ % handout layout
+ \usepackage{pgfpages}
+ \pgfpagesuselayout{4 on 1}[letterpaper,landscape,border shrink=5mm]
+
+ % solution stuff
+ \newcommand{\solnMult}[1]{#1}
+ \newcommand{\soln}[1]{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Option 3: Handouts, with solutions (may post after class if need be)    %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \documentclass[11pt,containsverbatim,handout,xcolor=xelatex,dvipsnames,table]{beamer}
+
+% % handout layout
+% \usepackage{pgfpages}
+% \pgfpagesuselayout{4 on 1}[letterpaper,landscape,border shrink=5mm]
+
+% % solution stuff
+% \newcommand{\solnMult}[1]{\red{\textbf{#1}}}
+% \newcommand{\soln}[1]{\textit{#1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Option 4: Notes Only
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% % See http://tex.stackexchange.com/questions/114219/add-notes-to-latex-beamer
+% \documentclass[10pt,containsverbatim,xcolor=xelatex,dvipsnames,table,notes=only]{beamer}
+
+% % handout layout
+% \usepackage{pgfpages}
+% \pgfpagesuselayout{2 on 1}[letterpaper, landscape, border shrink=5mm]
+
+% % solution stuff
+% \newcommand{\solnMult}[1]{#1}
+% \newcommand{\soln}[1]{}
+
+%%%%%%%%%%
+% Load style file, defaults  %
+%%%%%%%%%%
+
+\input{../../lec_style.tex}
+\input{../../definitions_default.tex}
+% ALT ALT
+% \input{../../definitions_custom.tex}
+
+%%%%%%%%%%%
+% Cover slide info    %
+%%%%%%%%%%%
+
+\title{Unit 6: Simple linear regression}
+\subtitle{2. Outliers \& Inference for SLR}
+\author{Sta 104 - Summer 2015}
+\date{June 15, 2015}
+\institute{Duke University, Department of Statistical Science}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+% Begin document and set Helvetica Neue font   %
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\fontspec[Ligatures=TeX]{Helvetica Neue Light}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Title Page
+
+\begin{frame}[plain]
+
+\titlepage
+\vfill
+{\scriptsize \webLink{\PersonalSite}{Dr. \LastName{}} \hfill Slides posted at  \webLink{\CourseSite}{\CourseSite}}
+\addtocounter{framenumber}{-1} 
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Housekeeping}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Announcements}
+
+\begin{itemize}
+
+\item 
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Main ideas}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{$R^2$ assesses model fit -- higher the better}
+\label{mi1}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+\frametitle{(1) $R^2$ assesses model fit -- higher the better}
+
+\begin{itemize}
+
+\item $R^2$: percentage of variability in $y$ explained by the model.
+
+\pause
+
+\item For single predictor regression: $R^2$ is the square of the correlation coefficient, $R$.
+{\tiny
+\begin{Verbatim}[frame=single, formatcom=\color{blue}]
+cor(murder$annual_murders_per_mil, murder$perc_pov)^2
+\end{Verbatim}
+}
+{\tiny
+\begin{Verbatim}[frame=single, formatcom=\color{gray}]
+[1] 0.7052275
+\end{Verbatim}
+}
+
+\pause
+
+\item For all regression: $R^2 = \frac{SS_{reg}}{SS_{tot}}$
+
+{\tiny
+\begin{Verbatim}[frame=single, formatcom=\color{blue}]
+m1 = lm(annual_murders_per_mil ~ perc_pov, data = murder)
+\end{Verbatim}
+}
+
+{\tiny
+\begin{Verbatim}[frame=single, formatcom=\color{gray}]
+Analysis of Variance Table
+
+Response: annual_murders_per_mil
+          Df  Sum Sq Mean Sq F value    Pr(>F)    
+perc_pov   1 1308.34 1308.34  43.064 3.638e-06 ***
+Residuals 18  546.86   30.38  
+\end{Verbatim}
+}
+
+\end{itemize}
+
+\pause
+
+\begin{adjustwidth}{-0.25cm}{0cm}
+{\small
+\[ R^2 = \frac{explained~variabilty}{total~variability} \pause =\frac{SS_{reg}}{SS_{tot}} \pause = \frac{1308.34}{1308.34 + 546.86} \pause = \frac{1308.34}{1855.2} \approx 0.71 \]
+}
+\end{adjustwidth}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{}
+
+\twocol{0.65}{0.35}{
+\clicker{$R^2$ for the regression model for predicting annual murders per million based on percentage living in poverty is roughly 71\%. Which of the following is the correct interpretation of this value?}
+}
+{
+\begin{center}
+\includegraphics[width=\textwidth]{figures/murder/annual_murders_per_mil_perc_pov}
+\end{center}
+}
+
+$\:$ \\
+
+\begin{enumerate}[(a)]
+
+\item 71\% of the variability in percentage living in poverty is explained by the model.
+
+\item 84\% of the variability in the murder rates is explained by the model, i.e. percentage living in poverty.
+
+\item \solnMult{71\% of the variability in the murder rates is explained by the model, i.e. percentage living in poverty.}
+
+\item 71\% of the time percentage living in poverty predicts murder rates accurately.
+
+\end{enumerate}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Inference for regression uses the T distribution}
+\label{mi2}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Inference for regression uses the T distribution}
+
+\begin{itemize}
+
+\item Use a T distribution for inference on the slope, with degrees of freedom $n - 2$
+\begin{itemize}
+\item Degrees of freedom for the slope(s) in regression is $df = n - p - 1$ where $p $ is the number of predictors (explanatory variables) in the model.
+\end{itemize}
+
+\pause
+
+\item Hypothesis testing for a slope: $H_0: \beta_1 = 0$; $H_A: \beta_1 \ne 0$ \\
+\begin{itemize}
+\item $T_{n-2} = \frac{b_1 - 0}{SE_{b_1}}$
+\item p-value = P(observing a slope at least as different from 0 as the one observed if in fact there is no relationship between $x$ and $y$
+\end{itemize}
+
+\pause
+
+\item Confidence intervals for a slope: 
+\begin{itemize}
+\item $b_1 \pm T^\star_{n-2} SE_{b_1}$
+\end{itemize}
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Conditions for regression}
+\label{mi3}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Conditions for regression}
+
+\begin{itemize}
+
+\item Linearity $\rightarrow$ randomly scattered residuals around 0 in the residuals plot -- important regardless of doing inference
+
+\pause
+
+\item Nearly normally distributed residuals $\rightarrow$ histogram or normal probability plot of residuals -- important for inference
+
+\pause
+
+\item Constant variability of residuals (\hl{homoscedasticity}) $\rightarrow$ no fan shape in the residuals plot -- important for inference
+
+\pause
+
+\item Independence of residuals (and hence observations) $\rightarrow$ depends on data collection method, often violated for time-series data --  important for inference
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Checking conditions}
+
+\twocol{0.5}{0.5}
+{
+\clicker{What condition is this linear model obviously and definitely violating?}
+\begin{enumerate}[(a)]
+\item Linear relationship
+\item Non-normal residuals
+\item \solnMult{Constant variability}
+\item Independence of observations
+\end{enumerate}
+}
+{
+\begin{center}
+\includegraphics[width=\textwidth]{figures/problems/heteroscedastic}
+\end{center}
+}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Checking conditions}
+
+\twocol{0.5}{0.5}
+{
+\clicker{What condition is this linear model obviously and definitely violating?}
+\begin{enumerate}[(a)]
+\item \solnMult{Linear relationship}
+\item Non-normal residuals
+\item Constant variability
+\item Independence of observations
+\end{enumerate}
+}
+{
+\begin{center}
+\includegraphics[width=\textwidth]{figures/problems/nonlinear}
+\end{center}
+}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Type of outlier determines how it should be handled}
+\label{mi4}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Type of outlier determines how it should be handled}
+
+\twocol{0.55}{0.5}{
+\begin{itemize}
+\item \pink{Leverage} point is away from the cloud of points horizontally, does not necessarily change the slope
+\item \green{Influential} point changes the \underline{slope} (most likely also has high leverage) -- run the regression with and without that point to determine
+\end{itemize}
+}
+{
+\begin{center}
+\includegraphics[width=\textwidth]{figures/outlier_sketch}
+\end{center}
+}
+
+\pause
+
+\begin{adjustwidth}{-0.25cm}{0cm}
+
+\begin{itemize}
+\item  \hl{Outlier} is an unusual point without these special characteristics (this one likely affects the intercept only)
+\item If clusters (groups of points) are apparent in the data, it might be worthwhile to model the groups separately.
+\end{itemize}
+
+\end{adjustwidth}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{}
+
+\vfill
+
+\app{6.2 Linear regression}{See course website for details}
+
+\vfill
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Summary}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Summary of main ideas}
+
+\vfill
+
+\begin{enumerate}
+
+\item \nameref{mi1}
+
+\item \nameref{mi2}
+
+\item \nameref{mi3}
+
+\item \nameref{mi4}
+
+\end{enumerate}
+
+\vfill
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}

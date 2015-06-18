@@ -42,29 +42,11 @@ Textbook errata: If you read something that doesn't make sense first check to se
 * Graded problems: Chp 6: 2, 4, 8, 12, 16, 20, 22, 26, 28, 30, 40, 44, 50, 52
 * Practice problems: Chp 6: 1, 3, 5, 7, 15, 19, 21, 25, 27, 29, 39, 43, 49, 51 
 
-* * *
+### PS 6:
 
-##### From Spring 2015
-
-
-
-PS 9:
-* Graded problems:
-  + Chp 7: 6, 8, 12, 20
-* Practice problems:
-  + Chp 7: 1, 3, 5, 7, 9, 11, 13, 15, 17, 19
-
-
-PS 10:
-* Graded problems:
-  + Chp 7: 24, 28, 30, 32
-  + Chp 8: 2, 4, 6
-* Practice problems:
-  + Chp 7: 23, 25, 27, 29, 31
-  + Chp 8: 1, 3, 5
-
-PS 11:
-* Graded problems:
-  + Chp 8: 8, 10, 12
-* Practice problems:
-  + Chp 8: 7, 9, 11
+* Graded problems: 
+  * Chp 7: 6, 8, 12, 20, 24, 28, 30, 32
+  * Chp 8: 2, 4, 6, 8, 10, 12
+* Practice problems: 
+  * Chp 7: 1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 23, 25, 27, 29, 31
+  * Chp 8: 1, 3, 5, 7, 9, 11

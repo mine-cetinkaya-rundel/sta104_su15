@@ -1,5 +1,5 @@
 ---
-title: "Lab 6"
+title: "Lab 7"
 author: '[Enter team name here]'
 date: '[Enter date here]'
 output:
@@ -20,27 +20,15 @@ output:
 enwkehkajhfjshf
 
 ```{r echo=FALSE}
-load(url("http://www.openintro.org/stat/data/mlb11.RData"))
+
 ```
 
 * * *
 
 #### 1:
 
-kjhdkjash fg 
-
-```{r}
-plot(mlb11[,1:5])
-x = 2
-```
-
 
 #### 2:
-
-```{r}
-x + 2
-```
-
 
 #### 3: 
 
@@ -60,14 +48,18 @@ x + 2
 
 #### 11:
 
-* * *
+#### 12:
 
-## On your own
+#### 13:
 
-#### 1:
+#### 14:
 
-#### 2:
+#### 15:
 
-#### 3:
+#### 16:
 
-#### 4:
+#### 17:
+
+#### 18:
+
+#### 19:

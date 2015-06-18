@@ -1,0 +1,106 @@
+% -*- TeX-engine: xetex; eval: (auto-fill-mode 0); eval: (visual-line-mode 1); -*-
+% Compile with XeLaTeX
+
+\documentclass[11pt]{article}
+\input{../app_style.tex}
+
+%%%%%%%%%%%
+% App Ex number    %
+%%%%%%%%%%%
+
+% DON'T FORGET TO UPDATE
+
+\newcommand{\appno}[1]
+{7.1}
+
+%%%%%%%%%%%%%%
+% Turn on/off solutions       %
+%%%%%%%%%%%%%%
+
+% Off
+\newcommand{\soln}[1]{
+\vskip5pt
+}
+
+%% On
+%\newcommand{\soln}[1]{
+%\textit{\textcolor{custom_darkGray}{#1}}
+%}
+
+%%%%%%%%%%%%%%%%
+% Document
+%%%%%%%%%%%%%%%%
+
+\begin{document}
+\fontspec[Ligatures=TeX]{Helvetica Neue Light}
+
+Dr. \c{C}etinkaya-Rundel \hfill Data Analysis and Statistical Inference \\
+
+\ttl{Application exercise \appno{}: \\
+MLR interpretations}
+
+\inst{Submit your responses on \Sakai{}, under the appropriate assignment. Only one submission per team is required. One team will be randomly selected and their responses will be discussed.}
+
+\section*{Income in the US}
+
+The data come from a random sample of 783 observations from the 2012 ACS.
+
+{\small
+\begin{enumerate}
+\item \texttt{income}: Yearly income (wages and salaries)
+\item \texttt{employment}: Employment status, not in labor force, unemployed, or employed
+\item \texttt{hrs\_work}: Weekly hours worked
+\item \texttt{race}: Race, White, Black, Asian, or other
+\item \texttt{age}: Age
+\item \texttt{gender}: gender, male or female
+\item \texttt{citizens}: Whether respondent is a US citizen or not
+\item \texttt{time\_to\_work}: Travel time to work
+\item \texttt{lang}: Language spoken at home, English or other
+\item \texttt{married}: Whether respondent is married or not
+\item \texttt{edu}: Education level, hs or lower, college, or grad
+\item \texttt{disability}: Whether respondent is disabled or not
+\item \texttt{birth\_qrtr}: Quarter in which respondent is born, jan thru mar, apr thru jun, jul thru sep, or oct thru dec 
+\end{enumerate}
+}
+
+The following model was fit to predict income:
+
+\begin{center}
+{\small
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
+  \hline
+(Intercept) & -15342.76 & 11716.57 & -1.31 & 0.19 \\ 
+  hrs\_work & 1048.96 & 149.25 & 7.03 & 0.00 \\ 
+  raceblack & -7998.99 & 6191.83 & -1.29 & 0.20 \\ 
+  raceasian & 29909.80 & 9154.92 & 3.27 & 0.00 \\ 
+  raceother & -6756.32 & 7240.08 & -0.93 & 0.35 \\ 
+  age & 565.07 & 133.77 & 4.22 & 0.00 \\ 
+  genderfemale & -17135.05 & 3705.35 & -4.62 & 0.00 \\ 
+  citizenyes & -12907.34 & 8231.66 & -1.57 & 0.12 \\ 
+  time\_to\_work & 90.04 & 79.83 & 1.13 & 0.26 \\ 
+  langother & -10510.44 & 5447.45 & -1.93 & 0.05 \\ 
+  marriedyes & 5409.24 & 3900.76 & 1.39 & 0.17 \\ 
+  educollege & 15993.85 & 4098.99 & 3.90 & 0.00 \\ 
+  edugrad & 59658.52 & 5660.26 & 10.54 & 0.00 \\ 
+  disabilityyes & -14142.79 & 6639.40 & -2.13 & 0.03 \\ 
+  birth\_qrtrapr thru jun & -2043.42 & 4978.12 & -0.41 & 0.68 \\ 
+  birth\_qrtrjul thru sep & 3036.02 & 4853.19 & 0.63 & 0.53 \\ 
+  birth\_qrtroct thru dec & 2674.11 & 5038.45 & 0.53 & 0.60 \\ 
+   \hline
+\end{tabular}
+}
+\end{center}
+
+\begin{enumerate}
+
+\item Interpret the intercept.
+
+\item Interpret the slope for hrs\_work.
+
+\item Interpret the slope for gender.
+
+\end{enumerate}
+
+\end{document}
